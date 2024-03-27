@@ -20,6 +20,7 @@ def process_label(text, labels):
         )
     return annotations
 
+
 def extract_span(text, unit):
     if unit == 'null':
         return (-1, -1)
@@ -27,7 +28,8 @@ def extract_span(text, unit):
     end = start + len(unit)
     return (start, end)
 
-def align_tokens_and_annotations_bilou(tokenized: Encoding, annotations):
+
+def align_tokens_and_annotations_bio(tokenized: Encoding, annotations):
     tokens = tokenized.tokens
     aligned_labels =  ['O'] * len(tokens)
     for anno in annotations:

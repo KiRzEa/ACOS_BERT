@@ -2,7 +2,7 @@ import itertools
 from dataclasses import dataclass
 from typing import List, Dict
 
-from utils import align_tokens_and_annotations_bio, process_label
+from .utils import align_tokens_and_annotations_bio, process_label
 
 import torch
 from torch.utils.data import DataLoader, Dataset
@@ -54,8 +54,11 @@ class ProcessedExample:
 
 class DataProcessor:
     def __init__(self, data_dir):
-        self.raw_examples = self.read_data(data_dir)
-    
+        self.DATA_DIR = data_dir
+        self.train_examples = self.process_data(data_dir + 'Train.txt')
+        self.dev_examples = self.process_data(data_dir + 'Dev.txt')
+        self.test_examples = self.process_data(data_dir + 'Test.txt')
+
     def read_data(self, data_dir):
 
         def strip(text):
@@ -72,7 +75,8 @@ class DataProcessor:
                 )               
         return raw_examples
 
-    def extract_spans_and_sentence(self, examples):
+    def process_data(self, path):
+        examples = self.read_data(path)
         processed_examples = []
         for example in examples:
             annotations = process_label(example.text, example.labels)
@@ -88,6 +92,7 @@ class DataProcessor:
                     )
                 )
         return processed_examples
+    
 @dataclass
 class InputExample:
     input_ids: List[int]
