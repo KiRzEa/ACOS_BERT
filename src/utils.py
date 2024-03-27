@@ -21,41 +21,33 @@ def align_tokens_and_annotations_bilou(tokenized: Encoding, annotations):
       token_idx = tokenized.char_to_token(char_idx)
       if token_idx is not None:
         annotation_token_idx_set.add(token_idx)
-    if len(annotation_token_idx_set) == 1:
-      token_idx  = annotation_token_idx_set.pop()
-      prefix = (
-          "U"
-      )
-      aligned_labels[token_idx] = f"{prefix}-{anno['label']}"
-    else:
-      last_token_in_anno_idx = len(annotation_token_idx_set) - 1
-      for num, token_idx in enumerate(sorted(annotation_token_idx_set)):
+
+      
+    for num, token_idx in enumerate(sorted(annotation_token_idx_set)):
         if num == 0:
-          prefix = 'B'
-        elif num == last_token_in_anno_idx:
-          prefix = 'L'
+            prefix = 'B'
         else:
-          prefix = 'I'
+            prefix = 'I'
         aligned_labels[token_idx] = f"{prefix}-{anno['label']}"
+
   return aligned_labels
 
 class LabelSet:
-  def __init__(self, labels: List[str], scheme="BIO"):
+  def __init__(self, labels: List[str]):
     self.labels_to_id = {}
     self.ids_to_label = {}
-    self.labels_to_id["O"] = 0
-    self.ids_to_label[0] = "O"
 
-    match scheme:
-        case "TO":
-            self.scheme = "T"
-        case "BIO":
-            self.scheme = "BI"
-        case "BILOU":
-            self.scheme = "BILU"
+    
+    self.ids_to_label["[PAD]"] = 0
+    self.ids_to_label["[CLS]"] = 1
+    self.labels_to_id["O"] = 2
 
-    num = 0
-    for _num, (label, s) in enumerate(itertools.product(labels, self.scheme)):
+    self.ids_to_label[0] = "[PAD]"
+    self.ids_to_label[1] = "[CLS]"
+    self.ids_to_label[2] = "O"
+
+    num = 2
+    for _num, (label, s) in enumerate(itertools.product(labels, "BI")):
       num = _num + 1
       l = f"{s}-{label}"
       self.labels_to_id[l] = num
