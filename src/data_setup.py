@@ -104,14 +104,21 @@ class InputExample:
 
 class TrainingDataset(Dataset):
     def __init__(self,
-                 data,
+                 examples,
                  label_set: LabelSet,
                  tokenizer: PreTrainedTokenizerFast,
                  ):
         self.label_set = label_set
         self.tokenizer = tokenizer
 
-        raise NotImplementedError
+        for example in examples:
+            
+
+    def __len__(self):
+        return len(self.data)
+    
+    def __getitem__(self, idx):
+        return self.data[idx]
 
 def main():
   processor = DataProcessor('/content/ACOS_BERT/data/ViRes')

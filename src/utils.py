@@ -35,6 +35,8 @@ def align_tokens_and_annotations_bio(tokenized: Encoding, annotations):
     aligned_labels[0] = ['CLS']
 
     for anno in annotations:
+        if anno['text'] == 'null':
+          continue
         annotation_token_idx_set = set()
         for char_idx in range(anno['start'], anno['end']):
             token_idx = tokenized.char_to_token(char_idx)
@@ -42,12 +44,12 @@ def align_tokens_and_annotations_bio(tokenized: Encoding, annotations):
                 annotation_token_idx_set.add(token_idx)
 
       
-    for num, token_idx in enumerate(sorted(annotation_token_idx_set)):
-        if num == 0:
-            prefix = 'B'
-        else:
-            prefix = 'I'
-        aligned_labels[token_idx] = f"{prefix}-{anno['label']}"
+        for num, token_idx in enumerate(sorted(annotation_token_idx_set)):
+            if num == 0:
+                prefix = 'B'
+            else:
+                prefix = 'I'
+            aligned_labels[token_idx] = f"{prefix}-{anno['label']}"
 
     return aligned_labels
 
