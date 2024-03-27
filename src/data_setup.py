@@ -2,7 +2,7 @@ import itertools
 from dataclasses import dataclass
 from typing import List, Dict
 
-from .utils import align_tokens_and_annotations_bio, process_label
+from utils import *
 
 import torch
 from torch.utils.data import DataLoader, Dataset
