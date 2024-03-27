@@ -38,8 +38,8 @@ class LabelSet:
     self.ids_to_label = {}
 
     
-    self.ids_to_label["[PAD]"] = 0
-    self.ids_to_label["[CLS]"] = 1
+    self.labels_to_id["[PAD]"] = 0
+    self.labels_to_id["[CLS]"] = 1
     self.labels_to_id["O"] = 2
 
     self.ids_to_label[0] = "[PAD]"
@@ -48,8 +48,9 @@ class LabelSet:
 
     num = 2
     for _num, (label, s) in enumerate(itertools.product(labels, "BI")):
-      num = _num + 1
+      num += 1
       l = f"{s}-{label}"
+      print(num, l)
       self.labels_to_id[l] = num
       self.ids_to_label[num] = l
 
