@@ -8,7 +8,7 @@ thịt hơi ít nhưng vị đậm đà nên ăn ưng luôn
 
 #3
 quán ngon, nhân viên dễ thương, tìm hơi khó, không có thang cuốn nên đi xuống hơi bất tiện, thành ra vắng lắm luôn
-{RESTAURANT#GENERAL,quán,positive,ngon}; {SERVICE#GENERAL,nhân viên,positive,dễ thương}; {RESTAURANT#MISCELLANEOUS,thang cuốn,negative,không có}; {RESTAURANT#GENERAL,null,negative,vắng}, {LOCATION#GENERAL,null,negative,khó}
+{RESTAURANT#GENERAL,quán,positive,ngon}; {SERVICE#GENERAL,nhân viên,positive,dễ thương}; {RESTAURANT#MISCELLANEOUS,thang cuốn,negative,không có}; {RESTAURANT#GENERAL,null,negative,vắng}; {LOCATION#GENERAL,null,negative,khó}
 
 #4
 giá cả thì cũng khá ổn so với sinh viên như mình nhưng đặt qua now thì quán có nhiệm vụ bỏ muỗng đũa để ăn chứ giao tới thất vọng hết sức ko có gì để ăn chã nhẽ bóc tay mà ăn

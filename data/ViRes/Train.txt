@@ -8060,7 +8060,7 @@ quầy thức ăn có sẵn khá đa dạng nhưng hơi nguội và chất lư�
 
 #2016
 khuôn viên rộng nhưng khá nóng, chòi nhiều nhưng phục vụ nhanh lẹ
-{SERVICE#GENERAL,phục vụ,positive,nhanh lẹ}; {AMBIENCE#GENERAL,khuôn viên,positive,rộng}; {RESTAURANT#MISCELLANEOUS,chòi,positive,nhiều};{AMBIENCE#GENERAL,khuôn viên,negative,nóng}
+{SERVICE#GENERAL,phục vụ,positive,nhanh lẹ}; {AMBIENCE#GENERAL,khuôn viên,positive,rộng}; {RESTAURANT#MISCELLANEOUS,chòi,positive,nhiều}; {AMBIENCE#GENERAL,khuôn viên,negative,nóng}
 
 #2017
 đồ ăn ngon mấy bạn phục vụ rất tốt và dễ thương chỉ bị cái là chắc bếp ít người hay sao á mà lên món lâu
