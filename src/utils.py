@@ -14,8 +14,8 @@ def process_label(text, labels):
            {
               'aspect_category': aspect_category,
               'sentiment': sentiment,
-              'opinion': {'text': opinion, 'start': opinion_span[0], 'end': opinion_span[1]},
-              'target':  {'text': target, 'start': target_span[0], 'end': target_span[1]}
+              'opinion': {'text': opinion, 'start': opinion_span[0], 'end': opinion_span[1], 'label': 'Opinion'},
+              'target':  {'text': target, 'start': target_span[0], 'end': target_span[1], 'label': 'Target'}
            }
         )
     return annotations
@@ -32,6 +32,8 @@ def extract_span(text, unit):
 def align_tokens_and_annotations_bio(tokenized: Encoding, annotations):
     tokens = tokenized.tokens
     aligned_labels =  ['O'] * len(tokens)
+    aligned_labels[0] = ['CLS']
+
     for anno in annotations:
         annotation_token_idx_set = set()
         for char_idx in range(anno['start'], anno['end']):
