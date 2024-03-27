@@ -59,12 +59,12 @@ class LabelSet:
   
 @dataclass
 class InputExample:
-    input_ids: IntList
-    token_type_ids: IntList
-    attention_mask: IntList
-    ner_mask: IntList
-    as_label: Int = None
-    ner_labels: IntList = None
+    input_ids: List[int]
+    token_type_ids: List[int]
+    attention_mask: List[int]
+    ner_mask: List[int]
+    as_label: int = None
+    ner_labels: List[int] = None
 
 class TrainingDataset(Dataset):
     def __init__(self,
