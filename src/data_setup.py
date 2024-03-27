@@ -83,7 +83,7 @@ class DataProcessor:
             for idx, anno in enumerate(annotations):
                 processed_examples.append(
                     ProcessedExample(
-                        id=f'{id}:{idx}',
+                        id=f'{example.id}:{idx}',
                         text=example.text,
                         aspect_category=anno['aspect_category'],
                         sentiment=anno['sentiment'],
@@ -115,6 +115,6 @@ class TrainingDataset(Dataset):
 
 def main():
   processor = DataProcessor('/content/ACOS_BERT/data/ViRes')
-  
+
 if __name__ == "__main__":
   main()
