@@ -6,6 +6,7 @@ giá cả ko rẻ cũg ko đắt, qán đẹp, nhân viên nhiệt tình.
 đồ uống tuy khá phong phú nhưng không có gì đặc sắc lắm vì đây cũng không phải là thế mạnh của spaghettibox
 {DRINKS#STYLE&OPTIONS,đồ uống,positive,phong phú}; {DRINKS#QUALITY,đồ uống,neutral,null}
 chai nước khoáng
+
 #3
 món ngon lịch sự sạch sẽ nhạc hay không khí khá ổn ps vì nhân viên ít nên phục vụ lên món hơi lâu
 {SERVICE#GENERAL,nhân viên,negative,ít}; {FOOD#QUALITY,món,positive,ngon}; {RESTAURANT#MISCELLANEOUS,nhạc,positive,hay}; {AMBIENCE#GENERAL,không khí,positive,khá ổn}; {SERVICE#GENERAL,lên món,negative,lâu}; {RESTAURANT#GENERAL,null,positive,lịch sự sạch sẽ}
