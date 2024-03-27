@@ -2,7 +2,7 @@ import itertools
 from dataclasses import dataclass
 from typing import List, Dict
 
-from utils import *
+from utils import align_tokens_and_annotations_bio, process_label
 
 import torch
 from torch.utils.data import DataLoader, Dataset
@@ -55,15 +55,15 @@ class ProcessedExample:
 class DataProcessor:
     def __init__(self, data_dir):
         self.DATA_DIR = data_dir
-        self.train_examples = self.process_data(data_dir + 'Train.txt')
-        self.dev_examples = self.process_data(data_dir + 'Dev.txt')
-        self.test_examples = self.process_data(data_dir + 'Test.txt')
+        self.train_examples = self.process_data(data_dir + '/Train.txt')
+        self.dev_examples = self.process_data(data_dir + '/Dev.txt')
+        self.test_examples = self.process_data(data_dir + '/Test.txt')
 
     def read_data(self, data_dir):
 
         def strip(text):
             return text.strip()
-        
+        print(data_dir)
         raw_examples = []
         with open(data_dir) as f:
             content = f.read()
@@ -85,10 +85,10 @@ class DataProcessor:
                     ProcessedExample(
                         id=f'{id}:{idx}',
                         text=example.text,
-                        aspect_category=annotations['aspect_category'],
-                        sentiment=annotations['sentiment'],
-                        target=annotations['target'],
-                        opinion=annotations['opinion']
+                        aspect_category=anno['aspect_category'],
+                        sentiment=anno['sentiment'],
+                        target=anno['target'],
+                        opinion=anno['opinion']
                     )
                 )
         return processed_examples
@@ -112,3 +112,9 @@ class TrainingDataset(Dataset):
         self.tokenizer = tokenizer
 
         raise NotImplementedError
+
+def main():
+  processor = DataProcessor('/content/ACOS_BERT/data/ViRes')
+  
+if __name__ == "__main__":
+  main()
