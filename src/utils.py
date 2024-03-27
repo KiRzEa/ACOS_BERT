@@ -10,8 +10,7 @@ from transformers import PreTrainedTokenizerFast, BatchEncoding
 from tokenizers import Encoding
 
 def extract_spans_and_sentence(text_with_annotations):
-   
-
+   raise NotImplementedError
 
 def align_tokens_and_annotations_bilou(tokenized: Encoding, annotations):
   tokens = tokenized.tokens
