@@ -5524,7 +5524,7 @@ không gian cũng nhỏ và ngột ngạt nhạc xập xình khá khó chịu, �
 
 #1382
 quán rộng rãi, đồ ăn phong phú, nhưng hơi lạt so với khẩu vị của mình
-{FOOD#QUALITY,đồ ăn,neutral,ổn}; {FOOD#STYLE&OPTIONS,đồ ăn,positive,phong phú}; {RESTAURANT#GENERAL,quán,positive,rộng rãi}
+{FOOD#QUALITY,đồ ăn,neutral,lạt}; {FOOD#STYLE&OPTIONS,đồ ăn,positive,phong phú}; {RESTAURANT#GENERAL,quán,positive,rộng rãi}
 
 #1383
 lâu rồi mới quay lại đồ ăn ướp vẫn ngon và vừa ăn như vậy nhưng co điều nhân viên phục vụ hơi chậm 1 ti
@@ -5656,7 +5656,7 @@ không gian quán có cách bày trí dễ thương, bàn ghế và đồ phục
 
 #1415
 sữa socola uống cũng ổn, mỗi tội là đồ đóng hộp nên lúc cuối thì thấy nó hơi bị cặn í ~.
-{DRINKS#QUALITY,sữa socola,neutral,ổn}; {RESTAURANT#MISCELLANEOUS,đồ đóng họp,negative,null}
+{DRINKS#QUALITY,sữa socola,neutral,ổn}; {RESTAURANT#MISCELLANEOUS,đồ đóng hộp,negative,null}
 
 #1416
 hi hi 👸🏻 đánh giá chung là đồ ăn ngon tuy nhiên giá cả hơi cao
@@ -5956,7 +5956,7 @@ lẩu 1 người khá là ngon nhưng giá hơi cao
 
 #1490
 Không gian vẫn nhỏ hẹp như vậy, Giá cả yêu thương , 20k / ly, không có chỗ để xe nên hơi vất vụ này .
-{DRINKS#PRICES,giá cả,positive,yêu thương}; {AMBIENCE#GENERAL,Không gian,negative,nhỏ hẹp}; {RESTAURANT#MISCELLANEOUS,chỗ để xe,negative,không có}
+{DRINKS#PRICES,Giá cả,positive,yêu thương}; {AMBIENCE#GENERAL,Không gian,negative,nhỏ hẹp}; {RESTAURANT#MISCELLANEOUS,chỗ để xe,negative,không có}
 
 #1491
 mình đã đi ăn ở đây rất nhiều lần rồi và chưa lần nào mình thất vọng cả giá cả ổn đồ ăn ngon nhân viên thân thiện dễ thương sẽ thường xuyên quay lại spicy box
@@ -6519,7 +6519,7 @@ nước chấm thơm vừa miệng 😘👏👏👍👍 giá hơn cao dù chỉ 
 {SERVICE#GENERAL,nhân viên phục vụ,positive,nhiệt tình}; {FOOD#QUALITY,đồ ăn,negative,tệ}
 
 #1631
-jollibee ở đây không gian hơi hẹp nhưng bù lại mì ý ngon là quá okkkk
+jollibee ở đây không gian hơi hẹp nhưng bù lại mỳ ý ngon là quá okkkk
 {FOOD#QUALITY,mỳ ý,positive,ngon}; {AMBIENCE#GENERAL,không gian,negative,hẹp}
 
 #1632
@@ -6600,7 +6600,7 @@ giá buffet khá cao nhưng đúng là chất lượng và thích nhất là ph�
 
 #1651
 vị gà khá ngon quán cũng sạch nhân viên order cũg dễ thương nói chung thì không có gì chê trách ngoài ở quán hơi ồn
-{RESTAURANT#GENERAL,quán,positive,sạch sẽ}; {SERVICE#GENERAL,nhân viên,positive,dễ thương}; {RESTAURANT#GENERAL,quán,negative,ồn}; {FOOD#QUALITY,vị gà,positive,ngon}
+{RESTAURANT#GENERAL,quán,positive,sạch}; {SERVICE#GENERAL,nhân viên,positive,dễ thương}; {RESTAURANT#GENERAL,quán,negative,ồn}; {FOOD#QUALITY,vị gà,positive,ngon}
 
 #1652
 phục vụ hơi chậm nhưng nhân viên phục vụ rất thân thiện nhưng nhà vệ sinh hơi dơ
@@ -6636,7 +6636,7 @@ view thì bình thường thôi kaka đến đây chỉ ăn là chủ yếu thô
 
 #1660
 hôm đó mình đi mà đông lắm ngồi chờ í món ngon phục vụ tốt decor bắt mắt có nhìu kem để lựa chọn nữa
-{RESTAURANT#GENERAL,null,neutral,đông}; {SERVICE#GENERAL,phục vụ,positive,tốt}; {FOOD#QUALITY,món,positive,ngon}; {FOOD#STYLE&OPTIONS,kem,positive,nhiều}; {AMBIENCE#GENERAL,decor,positive,bắt mắt}
+{RESTAURANT#GENERAL,null,neutral,đông}; {SERVICE#GENERAL,phục vụ,positive,tốt}; {FOOD#QUALITY,món,positive,ngon}; {FOOD#STYLE&OPTIONS,kem,positive,nhìu}; {AMBIENCE#GENERAL,decor,positive,bắt mắt}
 
 #1661
 mặc dù lên món lại hơi chậm tý nhưng đa số mình thấy nv có cải thiện, đồ ăn ngon
@@ -6804,7 +6804,7 @@ giá hơi đắt nhưng thật sự là k ngon mấy mình cũng hay ăn món h�
 
 #1702
 quán rất đông nhưng nv rất nhiệt tình nói chung là ok sẽ quay lại😋
-{RESTAURANT#GENERAL,quán,neutral,đông}; {SERVICE#GENERAL,nv,positive,nhiệt tình}; {FOOD#QUALITY,đồ ăn,positive,ngon}; {RESTAURANT#GENERAL,nói chung,neutral,ok}
+{RESTAURANT#GENERAL,quán,neutral,đông}; {SERVICE#GENERAL,nv,positive,nhiệt tình}; {RESTAURANT#GENERAL,nói chung,neutral,ok}
 
 #1703
 quán cũng hơi đông, nhưng thấy phục vụ nhanh , đồ ăn được, giá cả cũng ổn
@@ -7148,7 +7148,7 @@ quán ở tận tầng 5 nên bạn mình leo lên hơi vất vả thực đơn 
 
 #1788
 rất lâu mới đc phục vụ một đĩa bún đc mang ra ko gọn gàng và đẹp mắt, giá cả thì tạm được
-{SERVICE#GENERAL,phục vụ,negative,lâu}; {FOOD#STYLE&OPTIONS,đĩa bún,negative,ko gọn gàng}; {FOOD#STYLE&OPTIONS,đĩa bún,negative,ko đẹp mắt}; {RESTAURANT#PRICES,giá cả,neutral,tạm được}
+{SERVICE#GENERAL,phục vụ,negative,lâu}; {FOOD#STYLE&OPTIONS,đĩa bún,negative,ko gọn gàng}; {FOOD#STYLE&OPTIONS,đĩa bún,negative,đẹp mắt}; {RESTAURANT#PRICES,giá cả,neutral,tạm được}
 
 #1789
 dessert mình ăn thấy cũng khá bình thường, đc cái decor đẹp.
@@ -7204,7 +7204,7 @@ giá cả cũng ngang ngang so với mấy tiệm khác nhưng chất lượng h
 
 #1802
 giá đồ ăn và nước uống ở đây đối với mình là rẻ, không gian quán hơi nhỏ bàn ghế trang trí đẹp mắt sạch sẽ
-{FOOD#PRICES,giá đồ ăn,positive,rẻ}; {AMBIENCE#GENERAL,không gian,negative,nhỏ}; {RESTAURANT#MISCELLANEOUS,bàn ghế trang trí,positive,đẹp mắt sạch sẽ}; {DRINKS#PRICES,giá nước uống,positive,rẻ}
+{FOOD#PRICES,giá đồ ăn,positive,rẻ}; {AMBIENCE#GENERAL,không gian,negative,nhỏ}; {RESTAURANT#MISCELLANEOUS,bàn ghế trang trí,positive,đẹp mắt sạch sẽ}; {DRINKS#PRICES, nước uống,positive,rẻ}
 
 #1803
 thích nhất tráng miệng ở đây kêu mấy ly liền ăn cho đã luôn vì ngon quá mà phục vụ cũng tạm ổn
@@ -7288,7 +7288,7 @@ không gian khá nhỏ và hơi ám mùi đồ ăn, trang trí đơn giản sán
 
 #1823
 tết nên thôi kệ giá cao nhưng mà là phú nhuận nên đúng r bếp nấu ăn cũng sạch
-{RESTAURANT#MISCELLANEOUS,bếp bấu ăn,positive,sạch}; {RESTAURANT#PRICES,giá,negative,cao}
+{RESTAURANT#MISCELLANEOUS,bếp nấu ăn,positive,sạch}; {RESTAURANT#PRICES,giá,negative,cao}
 
 #1824
 lâu rồi mới ghé lại quán chất lượng đồ ăn ngon hơn ngày trước nhưng với thái độ phục vụ kém thế này ai còn muốn ghé
@@ -7340,7 +7340,7 @@ giá hạt dẻ nên ốc cũng nhỏ chứ không to lắm
 
 #1836
 quán tuy nhỏ nhưg cảm gíac thoải mái và ấm cúg
-{AMBIENCE#GENERAL,quán,positive,thoải mái}; {RESTAURANT#GENERAL,quán,negative,nhỏ}; {AMBIENCE#GENERAL,quán,positive,ấm cúng}
+{AMBIENCE#GENERAL,quán,positive,thoải mái}; {RESTAURANT#GENERAL,quán,negative,nhỏ}; {AMBIENCE#GENERAL,quán,positive,ấm cúg}
 
 #1837
 món ăn rất ngon món lên nhanh nhân viên thân thiện, phục vụ rất nhiệt tình, quản lý thì chu đáo thân thiện rất quan tâm khách hàng mình sẽ quay lại quán, chỉ có điều quán hơi khó tìm tý
@@ -7696,7 +7696,7 @@ quán nhìn bên ngoài khá bình dân nhưng chất lượng món thì cực k
 
 #1925
 không gian sáng sủa ấm cúng mặc dù mình cảm thấy có vẻ hơi nhỏ tí, thức uống đa dạng
-{AMBIENCE#GENERAL,không gian,positive,sáng sủa ấm cúng}; {AMBIENCE#GENERAL,không gian,negative,nhỏ}; {DRINKS#STYLE&OPTIONS,thức uống,positive,đủ loại}
+{AMBIENCE#GENERAL,không gian,positive,sáng sủa ấm cúng}; {AMBIENCE#GENERAL,không gian,negative,nhỏ}; {DRINKS#STYLE&OPTIONS,thức uống,positive,đa dạng}
 
 #1926
 đồ ăn ngon tuy giá hơi cao nhưng 1 phần khá nhiều 2 người gọi khoảng 3 món là ăn no nê ko gian yên tĩnh thoáng mát
@@ -8012,7 +8012,7 @@ quán hơi nhỏ đồ ăn okie nhưng đợi lâu nhé
 
 #2004
 quán nhỏ nhắn dễ thương thức ăn ok có điều nằm trong con đường nhỏ quá chạy xe vô hơi khó chút
-{FOOD#QUALITY,thức ăn,positive,neutra}; {AMBIENCE#GENERAL,quán,positive,nhỏ nhắn dễ thương}; {LOCATION#GENERAL,quán,negative,null}
+{FOOD#QUALITY,thức ăn,positive,ok}; {AMBIENCE#GENERAL,quán,positive,nhỏ nhắn dễ thương}; {LOCATION#GENERAL,quán,negative,null}
 
 #2005
 nhà hàng nằm trên đường 1 chiều nên cũng hơi bất tiện ko gian nhỏ hơn các chi nhánh khác nv thân thiện như mọi nơi
@@ -8108,7 +8108,7 @@ không gian ấm cũng nhưng hơi hẹp đồ ăn và đồ uống lên nhanh n
 
 #2028
 bánh ở đây ngon vì bánh ướt họ tự làm nên rất mỏng và dai bánh tráng lề cũng mềm và cực mỏng thịt 2 đầu da rõ ràng và ko bị khô, rau thì ko tươi lắm
-{FOOD#QUALITY,bánh,positive,ngon}; {FOOD#STYLE&OPTIONS,bánh ướt,positive,mỏng}; {FOOD#QUALITY,bánh ướt,positive,dai}; {FOOD#QUALITY,bánh tráng lề,positive,mềm}; {FOOD#STYLE&OPTIONS,rau,negative,không tươi}; {FOOD#STYLE&OPTIONS,bánh tráng lề,positive,mỏng}; {FOOD#QUALITY,thịt 2 đầu da,positive,ko bị khô}; {FOOD#STYLE&OPTIONS,thịt 2 đầu da,positive,rõ ràng}
+{FOOD#QUALITY,bánh,positive,ngon}; {FOOD#STYLE&OPTIONS,bánh ướt,positive,mỏng}; {FOOD#QUALITY,bánh ướt,positive,dai}; {FOOD#QUALITY,bánh tráng lề,positive,mềm}; {FOOD#STYLE&OPTIONS,rau,negative,ko tươi}; {FOOD#STYLE&OPTIONS,bánh tráng lề,positive,mỏng}; {FOOD#QUALITY,thịt 2 đầu da,positive,ko bị khô}; {FOOD#STYLE&OPTIONS,thịt 2 đầu da,positive,rõ ràng}
 
 #2029
 chưa bao giờ đi quán nào mà như quán này nhưng bù lại giá ok pizza ngon mì ý với khoai tây đều có ngò rí mùi khó chịu còn lại thì ok nhân viên nhanh nhẹn vui tính
@@ -8236,7 +8236,7 @@ cách phục vụ thì khá lịch sự nhưng đồ ăn tệ quá dặn lòng k
 
 #2060
 Nhà hàng Âu ngon giữa lòng Sài Gòn, giá cũng rất hạt dẻ nữa, đặt biệt quán có tổ chức bàn sinh nhật cũng nữa.
-{RESTAURANT#GENERAL,nhà hàng,positive,null}; {RESTAURANT#PRICES,giá,positive,hạt dẻ}; {RESTAURANT#MISCELLANEOUS,bàn sinh nhật,neutral,null}
+{RESTAURANT#GENERAL,Nhà hàng,positive,null}; {RESTAURANT#PRICES,giá,positive,hạt dẻ}; {RESTAURANT#MISCELLANEOUS,bàn sinh nhật,neutral,null}
 
 #2061
 không gian lẩu băng chuyền tầng 1 và 2 đợi đồ án đến rồi lấy đợi lâu quá mà không thấy món mình đến thì cứ gọi phục vụ cho món đó cho khỏi mất thời gian chờ nước uống khá ngon nước lựu ép rất ngon
@@ -8316,7 +8316,7 @@ không gian tuy nhỏ nhưng mà được cái sạch sẽ và thoáng điểm t
 
 #2080
 chấp nhận đc cho tiệc buffet,đồ ăn ko ngon lắm,được cái không gian
-{FOOD#QUALITY,đồ ăn,negative,không ngon}; {AMBIENCE#GENERAL,không gian,neutral,được}; {RESTAURANT#GENERAL,tiệc buffet,neutral,chấp nhận đc}
+{FOOD#QUALITY,đồ ăn,negative,ko ngon}; {AMBIENCE#GENERAL,không gian,neutral,được}; {RESTAURANT#GENERAL,tiệc buffet,neutral,chấp nhận đc}
 
 #2081
 đồ uống bt như những nơi khác view đẹp và quán sạch sẽ
@@ -8435,7 +8435,7 @@ giá cả cao so với chất lượng nhân viên khá ok
 {SERVICE#GENERAL,chất lượng nhân viên,neutral,ok}; {RESTAURANT#PRICES,giá cả,negative,cao}
 
 #2110
-kem ở mac donald rất ngon, có máy lạnh mát mẻ, nhưng khánh xếp hàng đông
+kem ở mac donald rất ngon, có máy lạnh mát mẻ, nhưng khách xếp hàng đông
 {FOOD#QUALITY,kem,positive,ngon}; {RESTAURANT#MISCELLANEOUS,máy lạnh,positive,mát mẻ}; {RESTAURANT#GENERAL,khách,neutral,đông}
 
 #2111
