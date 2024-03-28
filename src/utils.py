@@ -32,7 +32,7 @@ def extract_span(text, unit):
 def align_tokens_and_annotations_bio(tokenized: Encoding, annotations):
     tokens = tokenized.tokens
     aligned_labels =  ['O'] * len(tokens)
-    aligned_labels[0] = ['CLS']
+    aligned_labels[0] = "['CLS']"
 
     for anno in annotations:
         if anno['text'] == 'null':
