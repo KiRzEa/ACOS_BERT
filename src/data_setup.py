@@ -112,7 +112,7 @@ class TrainingDataset(Dataset):
         self.tokenizer = tokenizer
 
         for example in examples:
-            
+            pass
 
     def __len__(self):
         return len(self.data)
