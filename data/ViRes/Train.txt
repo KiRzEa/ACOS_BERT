@@ -104,7 +104,7 @@ không gian quán ấm cúng nhưng quán đông nên gọi món hơi lâu
 
 #27
 về món ăn thì ngon rồi nhưng cần chỉnh sửa cách phục vụ ở đây !
-{SERVICE#GENERAL,cách phục vụ,negative,negative}; {FOOD#QUALITY,món ăn,positive,ngon}
+{SERVICE#GENERAL,cách phục vụ,negative,null}; {FOOD#QUALITY,món ăn,positive,ngon}
 
 #28
 chất lượng ngon dễ ăn không gian hơi ồn ào
@@ -440,7 +440,7 @@ vị trí này thì quá đẹp và quá dễ tìm rồi chỉ tiếc là không
 
 #111
 quán hải sản nổi tiếng trứ danh đà nẵng nằm tít trong ngõ sâu may mà còn có ng chỉ đường cho k thì chắc là lạc mất luôn ạ
-{LOCATION#GENERAL,null hải sản,neutral,tít trong ngõ sâu}; {RESTAURANT#GENERAL,quán hải sản,positive,nổi tiếng trứ danh}
+{LOCATION#GENERAL,quán hải sản,neutral,tít trong ngõ sâu}; {RESTAURANT#GENERAL,quán hải sản,positive,nổi tiếng trứ danh}
 
 #112
 không gian tuy nhỏ nhưng cách bày trí thoáng đãng màu sắc tươi sáng khiến khách hàng cảm thấy dễ chịu, phải nói là chất lượng ăn rất ok với giá cả như vậy
@@ -536,7 +536,7 @@ topping hơi ít mình chúa ghét phô mai nhưng cũng thấy phô mai ở đ�
 
 #135
 Giá nước tầm 20k trở lên, không gian quán rộng rãi
-{DRINKS#PRICES,Giá nước,neutral,null}; {AMBIENCE#GENERAL,không gian,positive,rộng rãi}
+{DRINKS#PRICES,Giá nước,neutral,null}; {AMBIENCE#GENERAL,không gian,positive,rộng rãi}
 
 #136
 đồ ăn cũng được hơn hồi lần đầu mình đi nhưng cách phục vụ thì không chấp nhận được
@@ -580,7 +580,7 @@ love mom 😘😘 🎁 không gian đẹp mà đồ ăn dỡ quá không ngon g�
 
 #146
 rất nhiều đồ ăn đa dạng cho chúng ta thỏa thích cọn lựa phục vụ khá nhanh nhẹn và hoạt bát giá hơi cao nhưng bù lại đồ ăn rất ngon và hợp lý tiền nào của ấy
-{SERVICE#GENERAL,phục vụ,positive,nhanh nhẹn}; {FOOD#QUALITY,đồ ăn,positive,sạch sẽ}; {FOOD#STYLE&OPTIONS,đồ ăn,positive,đa dạng}; {FOOD#PRICES,giá,negative,cao}; {SERVICE#GENERAL,phục vụ,positive,hoạt bát}; {FOOD#QUALITY,đồ ăn,positive,ngon}
+{SERVICE#GENERAL,phục vụ,positive,nhanh nhẹn}; {FOOD#STYLE&OPTIONS,đồ ăn,positive,đa dạng}; {FOOD#PRICES,giá,negative,cao}; {SERVICE#GENERAL,phục vụ,positive,hoạt bát}; {FOOD#QUALITY,đồ ăn,positive,ngon}
 
 #147
 món ăn ngon, giá ổn và địa điểm đẹp
@@ -756,10 +756,10 @@ không gian quán nhìn sáng sủa có ko chỗ ngồi nướng đồ rất b�
 
 #190
 không gian mát mẻ tuy nhiên khá chật hẹp và ồn ào món ăn mình gọi 1 bò lúc lắc 80k và 1 bò sốt tiêu đen 80k
-{AMBIENCE#GENERAL,không gian,positive,mát mẻ}; {FOOD#PRICES,bò lúc lắc,neutral,null}; {FOOD#PRICES,bò sốt tiêu đen,neutral,null}; {RESTAURANT#GENERAL,null,negative,chật hẹp}; {RESTAURANT#GENERAL,null,negative,ổn ào}
+{AMBIENCE#GENERAL,không gian,positive,mát mẻ}; {FOOD#PRICES,bò lúc lắc,neutral,null}; {FOOD#PRICES,bò sốt tiêu đen,neutral,null}; {RESTAURANT#GENERAL,null,negative,chật hẹp}; {RESTAURANT#GENERAL,null,negative,ồn ào}
 
 #191
-không gian khá rộng rãi mà xui cái hôm nay có nhóm trẻ tổ chức sinh nhật nên quá ồn ào và ít chỗ lắm luôn
+không gian khá rộng rãi mà xui cái hôm nay có nhóm trẻ tổ chức sinh nhật nên quá ồn ào và ít chỗ ngồi lắm luôn
 {AMBIENCE#GENERAL,không gian,positive,rộng rãi}; {RESTAURANT#GENERAL,null,negative,ồn ào}; {RESTAURANT#MISCELLANEOUS,chỗ ngồi,negative,ít}
 
 #192
@@ -1332,7 +1332,7 @@ món cá tầm mình ăn hok quen còn món đậu hủ là tệ nhất nhân vi
 
 #334
 thức ăn cũng đc mà ít quá hơi buồn cà ri đắt kinh khủng, lẩu tomyum gần 400k nhưng mà ăn đáng tiền nhất luôn ấy
-{FOOD#QUALITY,thức ăn,neutral,cũng đc}; {FOOD#STYLE&OPTIONS,thức ăn,negative,ít}; {FOOD#PRICES,cà ri,negative,đắt}; {FOOD#QUALITY,lẩu tomyum,positive,đáng tiền}; {FOOD#QUALITY,cà ri,neutral,bt}; {FOOD#PRICES,lẩu tomyum,neutral,null}
+{FOOD#QUALITY,thức ăn,neutral,cũng đc}; {FOOD#STYLE&OPTIONS,thức ăn,negative,ít}; {FOOD#PRICES,cà ri,negative,đắt}; {FOOD#QUALITY,lẩu tomyum,positive,đáng tiền}; {FOOD#PRICES,lẩu tomyum,neutral,null}
 
 #335
 thưởng thức sườn bò mỹ rồng thượng hạng ở gyu kaku😎😎 thật sự mình đánh giá rất cao quán nướng nhật này về chất lượng thịt bò😆 giá buffet chỉ 340k người chưa vat chưa nước
@@ -1552,7 +1552,7 @@ về nhân viên phục vụ nhanh gọn vui vẻ nhiệt tình về không gian
 
 #389
 Dimsum không ngon, phục vụ ok, giá cả chưa thật sự phù hợp!
-{FOOD#QUALITY,dimsum,negative,không ngon}; {SERVICE#GENERAL,phục vụ,neutral,ok}; {RESTAURANT#PRICES,giá cả,negative,null}
+{FOOD#QUALITY,Dimsum,negative,không ngon}; {SERVICE#GENERAL,phục vụ,neutral,ok}; {RESTAURANT#PRICES,giá cả,negative,null}
 
 #390
 giá buffer tối nikko cao mà hải sản không nhiều không gian nhỏ đồ ăn cũng ngon mà rượu dở không thể nào uống được
@@ -1611,7 +1611,7 @@ quán nhỏ khoảng 8 bàn nhưng khá khang trang và phong cách sạch sẽ
 {FOOD#QUALITY,Đồ ăn,positive,ngon}; {FOOD#PRICES,giá cả,neutral,vừa tầm}; {FOOD#STYLE&OPTIONS,bày trí món ăn,positive,đẹp}
 
 #404
-không gian:tầng 1 chọn mua đồ + thanh toán, tầng 2 để ngồi, có điều hoà + wifi 👏🏻👏🏻.
+không gian:tầng 1 chọn mua đồ + thanh toán, tầng 2 để ngồi, có điều hòa + wifi 👏🏻👏🏻.
 {AMBIENCE#GENERAL,không gian,neutral,null}; {RESTAURANT#MISCELLANEOUS,điều hòa,positive,null}; {RESTAURANT#MISCELLANEOUS,wifi,positive,null}
 
 #405
@@ -1644,7 +1644,7 @@ cái đường khó kiếm quá đi mà bánh tráng 2 da nghe ngộ mà ăn c�
 
 #412
 Nước ngon, giá vừa túi tiền, nhân viên dthuong lắm nha, sẽ quay lại mua ủng hộ quán tiếp
-{DRINKS#QUALITY,nước,positive,ngon}; {DRINKS#PRICES,giá,neutral,vừa túi tiền}; {SERVICE#GENERAL,nhân viên,positive,dthuong}
+{DRINKS#QUALITY,Nước,positive,ngon}; {DRINKS#PRICES,giá,neutral,vừa túi tiền}; {SERVICE#GENERAL,nhân viên,positive,dthuong}
 
 #413
 thịt ngon nhà hàng hơi đông nên lên món hơi lâu nhân viên phục vụ nhiệt tình
@@ -1716,7 +1716,7 @@ túm lại là ngon nhưng kể ra cũng hơi đắt
 
 #430
 món ăn ngon mỗi tội giá cả hơi cao cho sinh viên vào ăn không gian đẹp sang trọng sạch sẽ
-{FOOD#QUALITY,món ăn,positive,ngon hợp khẩu vị}; {RESTAURANT#PRICES,giá cả,negative,cao}; {AMBIENCE#GENERAL,không gian,positive,đẹp sang trọng sạch sẽ}
+{FOOD#QUALITY,món ăn,positive,ngon}; {RESTAURANT#PRICES,giá cả,negative,cao}; {AMBIENCE#GENERAL,không gian,positive,đẹp sang trọng sạch sẽ}
 
 #431
 món ăn ra hơi lâu đem về nhà ăn mình cảm nhận phần nước khá ngon ngọt thanh phần mì ổn nhưng hải sản như mực thì dai tôm thì dạng đông lạnh nên ăn hơi chán chỉ có rau củ thấy tươi ngon
@@ -1748,7 +1748,7 @@ nước ngon, giá ko mắc quá, mình ăn dessert flab berries yogurt thấy k
 
 #438
 nhân viên thì nhiệt tình nhanh nhẹn và lịch sự có mỗi món ăn là ra hơi lâu hén còn chất lượng thì ổn
-{SERVICE#GENERAL,phục vụ nhân viên,positive,lịch sự}; {SERVICE#GENERAL,null,negative,lâu}; {SERVICE#GENERAL,nhân viên,positive,nhiệt tình nhanh nhẹn}; {FOOD#QUALITY,chất lượng,neutral,ổn}
+{SERVICE#GENERAL,nhân viên,positive,lịch sự}; {SERVICE#GENERAL,null,negative,lâu}; {SERVICE#GENERAL,nhân viên,positive,nhiệt tình nhanh nhẹn}; {FOOD#QUALITY,chất lượng,neutral,ổn}
 
 #439
 ngoại trừ thái độ nhân viên ngọc lan ra thì mọi thứ còn lại đều ok
@@ -1896,7 +1896,7 @@ nói chung ăn ok cũng ngon nhưng chờ hơi lâu
 
 #475
 đồ ăn ngon giá cũng tạm có điều thái độ nhân viên mình hông thích lắm
-{SERVICE#GENERAL,thái độ nhân viên,negative,không thích}; {FOOD#QUALITY,đồ ăn,positive,ngon}; {FOOD#PRICES,giá,neutral,tạm}
+{SERVICE#GENERAL,thái độ nhân viên,negative,hông thích}; {FOOD#QUALITY,đồ ăn,positive,ngon}; {FOOD#PRICES,giá,neutral,tạm}
 
 #476
 giá ở đây thì chát rồi nhưng đồ ăn, đồ uống tương xứng vs giá.
@@ -2052,7 +2052,7 @@ không gian quán rất đẹp và sang chảnh nằm ngay gần vincom bà tri�
 
 #514
 kem qá ngọt ko ngon nhân viên ở đây phục vụ rất nhiệt tình và chuyên nghiệp
-{SERVICE#GENERAL,nhân viên phục vụ,positive,nhiệt tình}; {DRINKS#QUALITY,kem,negative,ko ngon}; {DRINKS#STYLE&OPTIONS,kem,negative,ngọt}; {SERVICE#GENERAL,nhân viên phục vụ,positive,chuyên nghiệp}
+{SERVICE#GENERAL,nhân viên,positive,nhiệt tình}; {DRINKS#QUALITY,kem,negative,ko ngon}; {DRINKS#STYLE&OPTIONS,kem,negative,ngọt}; {SERVICE#GENERAL,nhân viên,positive,chuyên nghiệp}
 
 #515
 đi thấy ngon hơn tưởng tượng ấy món nào cũng ngon nha giá thì mình thấy cũng okie nhân viên phục vụ dễ thương
@@ -2640,7 +2640,7 @@ riêng thịt bò beefsteak thì giá hơi cao từ 100k trở lên nhân viên 
 
 #661
 đồ ăn phục vụ với mình khá lâu đồ ăn đc bài trí đơn giản
-{SERVICE#GENERAL,phục vụ,negative,lâu}; {FOOD#STYLE&OPTIONS,đồ ăn bài trí,neutral,đơn giản}
+{SERVICE#GENERAL,phục vụ,negative,lâu}; {FOOD#STYLE&OPTIONS,đồ ăn,neutral,đơn giản}
 
 #662
 hình như quán không có nv giữ xe chắc quán hơi nhỏ nên quán không tuyển, đồ uống thì ngon khỏi bàn
@@ -2688,7 +2688,7 @@ thức ăn cũng khá ổn mà giá trong tầm tay rất đáng để thử
 
 #673
 nhà hàng bày trí theo phong cách trung hoa cổ kính nhưng mình thấy không gian hơi nhỏ gặp đi cuối tuần nữa nên rất đông mới 7h tối mà gần như full bàn rồi
-{RESTAURANT#GENERAL,null,neutral,đông}; {AMBIENCE#GENERAL,không gian,negative,nhỏ}; {AMBIENCE#GENERAL,bày trí phong cách,neutral,trung hoa cổ kính}
+{RESTAURANT#GENERAL,null,neutral,đông}; {AMBIENCE#GENERAL,không gian,negative,nhỏ}; {AMBIENCE#GENERAL,phong cách,neutral,trung hoa cổ kính}
 
 #674
 quán còn decor rất bắt mắt tuy nhiên chỗ để xe hơi hẹp
@@ -2967,7 +2967,7 @@ quán này bị cái chỗ gửi xe hơi nhỏ nhưng không gian bên trong si�
 {RESTAURANT#MISCELLANEOUS,chỗ gửi xe,negative,nhỏ}; {AMBIENCE#GENERAL,không gian,positive,siêu rộng}
 
 #743
-menu đa dạng giá cũng hơi cao tầm 60 70 tô mì vị ăn vừa miệng có thể thêm gia vị tùy ý khẩu phần cũng hơi bị nhiều quán ăn thực khách tự phục vụ
+menu đa dạng giá cũng hơi cao tầm 60 70 tô mì vị ăn vừa miệng có thể thêm gia vị tùy ý khẩu phần cũng hơi bị nhiều quán ăn thực khách tự phục vụ
 {FOOD#QUALITY,vị,positive,vừa miệng}; {FOOD#STYLE&OPTIONS,menu,positive,đa dạng}; {FOOD#PRICES,giá,negative,cao}; {FOOD#STYLE&OPTIONS,khẩu phần,positive,nhiều}
 
 #744
@@ -2991,7 +2991,7 @@ còn menu đồ ăn không phong phú lắm với đồ ăn đem lên ít quá, 
 {FOOD#STYLE&OPTIONS,menu,negative,không phong phú}; {FOOD#STYLE&OPTIONS,đồ ăn,negative,ít}; {AMBIENCE#GENERAL,không gian,negative,nhỏ}; {AMBIENCE#GENERAL,không gian,positive,sáng sủa}; {AMBIENCE#GENERAL,không gian,positive,ấm áp}; {AMBIENCE#GENERAL,decor,neutral,đơn giản}
 
 #749
-lối vào hơi nhỏ nhưng cảm giác trang trí khad ấm cúng
+lối vào hơi nhỏ nhưng cảm giác trang trí khad ấm cúng
 {AMBIENCE#GENERAL,trang trí,positive,ấm cúng}; {RESTAURANT#MISCELLANEOUS,lối vào,negative,nhỏ}
 
 #750
@@ -2999,7 +2999,7 @@ chất lượng phục vụ được cải thiện hơn nhiều so với trướ
 {SERVICE#GENERAL,chất lượng phục vụ,positive,cải thiện}; {FOOD#QUALITY,chất lượng thức ăn,negative,giảm sút}
 
 #751
-nhiều món ngon , trong này tây cũng nhiều , thích nhất là uống nước bằng lu nhưng giá nước hơi cao
+nhiều món ngon , trong này tây cũng nhiều , thích nhất là uống nước bằng lu nhưng giá nước hơi cao
 {FOOD#QUALITY,món,positive,ngon}; {FOOD#STYLE&OPTIONS,món,positive,nhiều}; {DRINKS#STYLE&OPTIONS,null,positive,null}; {DRINKS#PRICES,giá nước,negative,cao}
 
 #752
@@ -3368,7 +3368,7 @@ nhân viên phục vụ tốt thời gian chờ khá lâu bù lại đồ ăn đ
 
 #843
 bảo vệ mất dạy nhưng được cái đồ ăn khá ngon, địa chỉ ở ngay quận 5
-{LOCATION#GENERAL,địa chị,neutral,quận 5}; {SERVICE#GENERAL,bảo vệ,negative,mất dạy}; {FOOD#QUALITY,đồ ăn,positive,ngon}
+{LOCATION#GENERAL,địa chỉ,neutral,quận 5}; {SERVICE#GENERAL,bảo vệ,negative,mất dạy}; {FOOD#QUALITY,đồ ăn,positive,ngon}
 
 #844
 quán thì được cái đồ ăn phong phú đa dạng nhưng do không chuyên cái món gì nên thành ra mỗi món thì tàm tạm thôi
@@ -4136,7 +4136,7 @@ món ko ngon ko sao nhưng phục vụ như vậy thì rất đáng đồng ti�
 
 #1035
 có dịp mình và bạn đã đến nơi đây rồi , thức ăn cũng được, không gian rất thoải mái và rộng rãi, mát mẻ , , đồ ăn lúc nào cũng lên liên tục ,
-{FOOD#STYLE&OPTIONS,đồ ăn lên,positive,liên tục}; {AMBIENCE#GENERAL,không gian,positive,thoải mái}; {AMBIENCE#GENERAL,không gian,positive,rộng rãi}; {AMBIENCE#GENERAL,không gian,positive,mát mẻ}; {FOOD#QUALITY,thức ăn,neutral,cũng được}
+{FOOD#STYLE&OPTIONS,đồ ăn,positive,liên tục}; {AMBIENCE#GENERAL,không gian,positive,thoải mái}; {AMBIENCE#GENERAL,không gian,positive,rộng rãi}; {AMBIENCE#GENERAL,không gian,positive,mát mẻ}; {FOOD#QUALITY,thức ăn,neutral,cũng được}
 
 #1036
 hài lòng khi nhân viên rất cute đồ ăn ngon giá hơi cao nhưng đảm bao chất lượng
@@ -4520,7 +4520,7 @@ sốt không ngon ướp bình thường mau ngán được cái thịt dày hơ
 
 #1131
 giá khá là chát so với chất lượng phục vụ và món ăn quá ít, cơm cá hồi cũng bình thường, salad cá ngừ hơi tanh
-{FOOD#STYLE&OPTIONS,món ăn,negative,ít}; {RESTAURANT#PRICES,giá,negative,chát}; {FOOD#QUALITY,cơm cá ngừ,neutral,bình thường}; {FOOD#STYLE&OPTIONS,salad cá ngừ,negative,tanh}
+{FOOD#STYLE&OPTIONS,món ăn,negative,ít}; {RESTAURANT#PRICES,giá,negative,chát}; {FOOD#QUALITY,cơm cá hồi,neutral,bình thường}; {FOOD#STYLE&OPTIONS,salad cá ngừ,negative,tanh}
 
 #1132
 quán hơi nhỏ nhưng thoáng nhân viên dễ thương đồ ăn cũng ngon nữa giá hơi mắc thì phải nhưng chất lượng ổn
@@ -5064,7 +5064,7 @@ chất lượng nước kém không ngon so với mức giá nhưng chất lư�
 
 #1267
 Quán đẹp từ ngoài vào trong, nằm trên mặt đường Hàng Vôi rất dễ tìm, đồ uống giữ phong độ, mỗi loại đều rất ngon nhưng khách hàng đông
-{RESTAURANT#GENERAL,quán,positive,đẹp}; {LOCATION#GENERAL,null,positive,dễ tìm}; {DRINKS#QUALITY,đồ uống,positive,ngon}; {RESTAURANT#GENERAL,khách hàng,neutral,đông}
+{RESTAURANT#GENERAL,Quán,positive,đẹp}; {LOCATION#GENERAL,null,positive,dễ tìm}; {DRINKS#QUALITY,đồ uống,positive,ngon}; {RESTAURANT#GENERAL,khách hàng,neutral,đông}
 
 #1268
 quán nằm ở vị trí cũng được, view nhìn đẹp thoáng nhân viên phục vụ cũng ok nhưng mà hơi lâu tí
@@ -5112,7 +5112,7 @@ quán ăn tạm ổn , đồ hơi đắt nhưng khá ngon , sốt nêm nếm v�
 
 #1279
 vì đám tụi mình ăn ít nên như trên là đã no căng bụng rồi giá cả hợp lý với chất lượng đồ ăn ở đây nha phục vụ vui vẻ và mình có để ý nhỏ là đầu bếp ở đây đa phần là nam
-{SERVICE#GENERAL,phục vụ,positive,vui vẻ}; {RESTAURANT#PRICES,giá cả,positive,hợp lí}; {FOOD#STYLE&OPTIONS,null,neutral,null}
+{SERVICE#GENERAL,phục vụ,positive,vui vẻ}; {RESTAURANT#PRICES,giá cả,positive,hợp lý}; {FOOD#STYLE&OPTIONS,null,neutral,null}
 
 #1280
 không gian rộng đồ ăn ổn giá hơi cao nhân viên không tệ như mấy review trước
@@ -5196,7 +5196,7 @@ một ngày tình cờ đi qua ngoại thương thăm bạn bắt gặp quán n�
 
 #1300
 ăn khá ok ko gian đẹp nhìu món lạ nhưng có điều giá hơi cao
-{FOOD#QUALITY,null,neutral,ok}; {FOOD#STYLE&OPTIONS,món lạ,positive,nhiều}; {RESTAURANT#PRICES,giá,negative,cao}; {AMBIENCE#GENERAL,ko gian,positive,đẹp}
+{FOOD#QUALITY,null,neutral,ok}; {FOOD#STYLE&OPTIONS,món lạ,positive,nhìu}; {RESTAURANT#PRICES,giá,negative,cao}; {AMBIENCE#GENERAL,ko gian,positive,đẹp}
 
 #1301
 cafe cốt dừa uống cũng ổn lắm cafe đá xay hơi nhiều đá
@@ -5244,7 +5244,7 @@ bò ngon nhưng màu k đẹp mắt lắm nếu như k có màu salat vớt lạ
 
 #1312
 quán yên tĩnh so với các quán pub khác , pha chế ổn , không gian rất ấm cúng , giá ok
-{RESTAURANT#PRICES,giá,neutral,okie}; {AMBIENCE#GENERAL,không gian,positive,ấm cúng}; {DRINKS#QUALITY,pha chế,neutral,ổn}; {RESTAURANT#GENERAL,null,positive,yên tĩnh}
+{RESTAURANT#PRICES,giá,neutral,ok}; {AMBIENCE#GENERAL,không gian,positive,ấm cúng}; {DRINKS#QUALITY,pha chế,neutral,ổn}; {RESTAURANT#GENERAL,null,positive,yên tĩnh}
 
 #1313
 các món ở đây cũng khá ngon nhưng đắt hơn so với giá trị thực
@@ -5264,7 +5264,7 @@ thực sự với giá 349k mà chất lượng thì tệ không tả nổi
 
 #1317
 bữa nhân ngày bà mợ út bị giận nhau với chồng ẻm dắt nguyên đàn cháu vô đây ăn không gian thì bao mát giá cả lại rẻ bất ngờ có điều nước ở đây quá mắc chai nước suối mà 25k nuoc ngot cũng thế
-{DRINKS#PRICES,chai nước nước suối,negative,mắc}; {RESTAURANT#PRICES,giá cả,positive,rẻ}; {AMBIENCE#GENERAL,không gian,positive,mát}
+{DRINKS#PRICES,chai nước suối,negative,mắc}; {RESTAURANT#PRICES,giá cả,positive,rẻ}; {AMBIENCE#GENERAL,không gian,positive,mát}
 
 #1318
 tính ra giá khá cao 600 mấy cho một người nhưng thật sự đối với service và chất lượng đồ ăn quá tốt như vậy thì tụi mình thấy rất xứng đáng ăn no căng bụng quên cả lối về 😆
@@ -5376,7 +5376,7 @@ không gian hơi chật nhưng hủ tiếu ăn ngon.
 
 #1345
 giá cũng tương đương với các nơi khác nhưng chất lượng nguyên liệu tệ hơn, rất nhiều sò đỏ 3 miếng không ngon và mỏng
-{FOOD#QUALITY,chất lượng nguyên liệu,negative,tệ}; {FOOD#STYLE&OPTIONS,sò đỏ,negative,nhỏ}; {FOOD#QUALITY,sò đỏ,negative,không ngon}; {FOOD#PRICES,giá,neutral,null}
+{FOOD#QUALITY,chất lượng nguyên liệu,negative,tệ}; {FOOD#STYLE&OPTIONS,sò đỏ,negative,mỏng}; {FOOD#QUALITY,sò đỏ,negative,không ngon}; {FOOD#PRICES,giá,neutral,null}
 
 #1346
 nhân viên ok, không gian đẹp nhưng hơi nhỏ, khá âm cúng, sắp xếp món ăn đẹp.
@@ -5419,7 +5419,7 @@ quán hơi nhỏ không sang trọng như các nhà hàng thái khác nhưng bá
 {FOOD#QUALITY,đồ ăn nêm nếm,positive,vừa miệng ngon}; {RESTAURANT#GENERAL,quán,negative,nhỏ không sang trọng}
 
 #1356
-thôi kể lể ra thì dài dòng tóm lại là ngon nhưng cái gía cũng đắt choáng váng hết cả mặt mày
+thôi kể lể ra thì dài dòng tóm lại là ngon nhưng cái giá cũng đắt choáng váng hết cả mặt mày
 {RESTAURANT#GENERAL,null,positive,ngon}; {RESTAURANT#PRICES,giá,negative,đắt}
 
 #1357
@@ -5492,7 +5492,7 @@ giá cả mình thấy hơi cao đồ ăn ít mà giá trên trời bù lại m�
 
 #1374
 không gian sạch đẹp sáng sủa nhưng chắc giá hơi cao nên khá vắng khách so với những quán xung quanh
-{RESTAURANT#GENERAL,khách,negative,vắng}; {RESTAURANT#PRICES,giá,negative,cao}; {AMBIENCE#GENERAL,không gian,positive,sạch đẹp sáng sửa}
+{RESTAURANT#GENERAL,khách,negative,vắng}; {RESTAURANT#PRICES,giá,negative,cao}; {AMBIENCE#GENERAL,không gian,positive,sạch đẹp sáng sủa}
 
 #1375
 được mời đi ăn , đồ ăn trình bày đẹp , vị thì hơi lạt so với mình , không gian ấm cúng , view đẹp

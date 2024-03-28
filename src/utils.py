@@ -41,7 +41,15 @@ def align_tokens_and_annotations_bio(tokenized: Encoding, annotations):
           continue
         annotation_token_idx_set = set()
         for char_idx in range(anno['start'], anno['end']):
-            token_idx = tokenized.char_to_token(char_idx)
+            try:
+                token_idx = tokenized.char_to_token(char_idx)
+            except:
+                print(tokenized.tokens)
+                print(anno)
+                print(char_idx)
+                print(anno['start'])
+                print(anno['end'])
+                exit()
             if token_idx is not None:
                 annotation_token_idx_set.add(token_idx)
 
@@ -62,10 +70,11 @@ def get_ner_mask(tokenized: Encoding, max_seq_length: int):
 
     return ner_mask
 
+
 def normalize_label(aspect_category, sentiment):
     aspect_category = re.sub(r'#', ' ', aspect_category.lower())
     aspect_category = re.sub(r'&', '_', aspect_category)
-    return aspect_category + sentiment
+    return aspect_category + ' ' + sentiment
 
 def get_acs(aspect_category_path, sentiment_path):
 
