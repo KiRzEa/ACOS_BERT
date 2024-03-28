@@ -1,4 +1,6 @@
 import re
+import itertools
+import argparse
 
 from tokenizers import Encoding
 
@@ -32,7 +34,7 @@ def extract_span(text, unit):
 def align_tokens_and_annotations_bio(tokenized: Encoding, annotations):
     tokens = tokenized.tokens
     aligned_labels =  ['O'] * len(tokens)
-    aligned_labels[0] = "['CLS']"
+    aligned_labels[0] = "[CLS]"
 
     for anno in annotations:
         if anno['text'] == 'null':
@@ -53,8 +55,35 @@ def align_tokens_and_annotations_bio(tokenized: Encoding, annotations):
 
     return aligned_labels
 
-    
+def get_ner_mask(tokenized: Encoding, max_seq_length: int):
+    segment_ids = tokenized.type_ids
+    sep_idx = segment_ids.index(1) - 1
+    ner_mask = [1] * sep_idx + [0] * (max_seq_length - sep_idx)
+
+    return ner_mask
+
+def normalize_label(aspect_category, sentiment):
+    aspect_category = re.sub(r'#', ' ', aspect_category.lower())
+    aspect_category = re.sub(r'&', '_', aspect_category)
+    return aspect_category + sentiment
+
+def get_acs(aspect_category_path, sentiment_path):
+
+    with open(aspect_category_path) as f:
+        aspect_category_set = f.read().split('\n')
+    with open(sentiment_path) as f:
+        sentiment_set = f.read().split('\n')
+
+    compose_set = []
+    for (aspect_category, sentiment) in itertools.product(aspect_category_set, sentiment_set):
+        compose_set.append(normalize_label(aspect_category, sentiment))
+
+    return compose_set
+
+
 def main():
-   print("[INFO] Testing...")
+    print("[INFO] Testing...")
+    print(get_acs('/workspaces/ACOS_BERT/data/ViRes/aspect_category_set.txt', '/workspaces/ACOS_BERT/data/ViRes/sentiment_set.txt'))
+
 if __name__ == "__main__":
    main()

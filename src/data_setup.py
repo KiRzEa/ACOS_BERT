@@ -2,7 +2,7 @@ import itertools
 from dataclasses import dataclass
 from typing import List, Dict
 
-from utils import align_tokens_and_annotations_bio, process_label
+from utils import align_tokens_and_annotations_bio, process_label, get_ner_mask, normalize_label
 
 import torch
 from torch.utils.data import DataLoader, Dataset
@@ -34,6 +34,8 @@ class LabelSet:
 
   def get_aligned_label_ids_from_annotations(self, tokenized_text, annotations):
     raw_labels = align_tokens_and_annotations_bio(tokenized_text, annotations)
+    print(raw_labels)
+    print(list(map(self.labels_to_id.get, raw_labels)))
     return list(map(self.labels_to_id.get, raw_labels))
 
 @dataclass
@@ -95,24 +97,46 @@ class DataProcessor:
     
 @dataclass
 class InputExample:
+    _id: str
     input_ids: List[int]
     token_type_ids: List[int]
     attention_mask: List[int]
     ner_mask: List[int]
-    as_label: int = None
+    acs_label: int = None
     ner_labels: List[int] = None
 
 class TrainingDataset(Dataset):
     def __init__(self,
-                 examples,
+                 examples: List[ProcessedExample],
                  label_set: LabelSet,
+                 compose_set: List[str],
                  tokenizer: PreTrainedTokenizerFast,
+                 max_seq_length: int
                  ):
         self.label_set = label_set
         self.tokenizer = tokenizer
+        self.compose_set = compose_set
+        self.examples = self.process(examples)
+        self.max_seq_length = max_seq_length
+        self.compose_to_id = {compose: idx for idx, compose in enumerate(compose_set.items())}
+        self.id_to_compose = {idx: compose for idx, compose in enumerate(compose_set.items())}
+        
 
+    def process(self, examples: List[ProcessedExample]):
+        pre_id = "##"
         for example in examples:
-            pass
+            if pre_id != example.id:
+                for ac_s in self.compose_set:
+                    example_id = example.id.split(':')
+                    tokenized = self.tokenizer(example.text, ac_s, padding='max_length', max_length=self.max_seq_length)
+                    ner_mask = get_ner_mask(tokenized, self.max_seq_length)
+                    asc_label = 0
+                    ner_labels = ['O'] * sum(ner_mask)
+
+                    
+            else:
+                # acs_label = normalize_label(example.aspect_category, example.sentiment)
+                pass
 
     def __len__(self):
         return len(self.data)
