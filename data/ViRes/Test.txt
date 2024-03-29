@@ -732,7 +732,7 @@ mình rất thích bánh gạo nhưng có lẽ quán này là tệ nhất quán 
 
 #184
 pizza khá ngon nằm ở trung tâm , giá cả phải chăng , trang trí quán bình thường k có gì đặc sắc
-{FOOD#QUALITY,pizza,positive,ngon}; {RESTAURANT#PRICES,giá cả,positive,phải chăng}; {AMBIENCE#GENERAL,trang trí,neutral,bình thường}; {LOCATION#GENERAL,trang trí quan,positive,trung tâm}
+{FOOD#QUALITY,pizza,positive,ngon}; {RESTAURANT#PRICES,giá cả,positive,phải chăng}; {AMBIENCE#GENERAL,trang trí,neutral,bình thường}; {LOCATION#GENERAL,trang trí quán,positive,trung tâm}
 
 #185
 không vì không gian đẹp thì quán này cũng khó thu hút khách rồi đồ uống ko có ngon kiến trúc của quán được đầu tư về sân vườn
@@ -896,7 +896,7 @@ các bạn phục vụ tuy lên món hơi chậm nhưng rất nhiệt tình, mó
 
 #225
 thức ăn và giá ổn , thời gian lên món k quá lâu , không gian quán hơi nhỏ nhưng sạch ,đẹp , menu thì hơi ít món , , vị trí dễ tìm !
-{SERVICE#GENERAL,thời gian lên món,neutral,k quá lâu}; {FOOD#QUALITY,thức ăn,neutral,ổn}; {FOOD#STYLE&OPTIONS,menu,negative,ít}; {AMBIENCE#GENERAL,không gian,negative,nhỏ}; {FOOD#PRICES,giá,neutral,ổn}; {LOCATION#GENERAL,vị trí,positive,dễ tìm}; {AMBIENCE#GENERAL,không gian,positive,sạch sẽ}; {AMBIENCE#GENERAL,không gian,positive,đẹp}
+{SERVICE#GENERAL,thời gian lên món,neutral,k quá lâu}; {FOOD#QUALITY,thức ăn,neutral,ổn}; {FOOD#STYLE&OPTIONS,menu,negative,ít}; {AMBIENCE#GENERAL,không gian,negative,nhỏ}; {FOOD#PRICES,giá,neutral,ổn}; {LOCATION#GENERAL,vị trí,positive,dễ tìm}; {AMBIENCE#GENERAL,không gian,positive,sạch}; {AMBIENCE#GENERAL,không gian,positive,đẹp}
 
 #226
 giá hơi cao nhưng chất lượng tốt giữ xe free có wifi
@@ -1256,7 +1256,7 @@ quán được trang hoàng đẹp đẽ , ước gì nhân viên và chất lư
 
 #315
 còn các món lẻ cũng rất đa dạng và mình thấy giá hợp lý chất lượng mình vẫn đánh giá cao chất lượng thịt nhưng phí không rẻ đâu
-{FOOD#QUALITY,chất lượng thịt,positive,đánh giá cao}; {FOOD#QUALITY,nêm nếm,positive,đánh giá cao}; {FOOD#PRICES,giá,positive,hợp lý}; {FOOD#STYLE&OPTIONS,món lẻ,positive,đa dạng}; {FOOD#PRICES,phí,negative,không rẻ}
+{FOOD#QUALITY,chất lượng thịt,positive,đánh giá cao}; {FOOD#PRICES,giá,positive,hợp lý}; {FOOD#STYLE&OPTIONS,món lẻ,positive,đa dạng}; {FOOD#PRICES,phí,negative,không rẻ}
 
 #316
 giá hơi cao so với các sushi khác nhưng bù lại chất lượng rất tốt
@@ -1396,7 +1396,7 @@ giá ổn với chất lượng món ăn và thái độ phục vụ
 
 #350
 mì ý sốt bò ở đây ăn cũng được 60k dĩa, phục vụ nhân viên nhiệt tình nhưng thao tác hơi lâu
-{SERVICE#GENERAL,phục vụ nhân viên,positive,nhiệt tình}; {SERVICE#GENERAL,thao tác,negative,lâu}; {FOOD#QUALITY,mì ý sốt bò,neutral,tạm chấp nhận được}; {FOOD#PRICES,mì ý sốt bò,neutral,null}
+{SERVICE#GENERAL,phục vụ nhân viên,positive,nhiệt tình}; {SERVICE#GENERAL,thao tác,negative,lâu}; {FOOD#QUALITY,mì ý sốt bò,neutral,ăn cũng được}; {FOOD#PRICES,mì ý sốt bò,neutral,null}
 
 #351
 về không gian quán có diện tích cũng nhỏ nhưng thiết kế gần gũi, menu nước của quán đa dạng, giá cả thì tạm ổn
@@ -1420,7 +1420,7 @@ mình rất thích nhân viên dễ thương thân thiện nhưng phục vụ h�
 
 #356
 nằm trong con hẻm trên đường cộng hoà, không gian buffet dìn ký khá rộng rãi và thoáng mát.
-{AMBIENCE#GENERAL,không gian,positive,rộng rãi}; {LOCATION#GENERAL,null,neutral,nằm trong hẻm}; {AMBIENCE#GENERAL,không gian,positive,thoáng mát}
+{AMBIENCE#GENERAL,không gian,positive,rộng rãi}; {LOCATION#GENERAL,null,neutral,nằm trong con hẻm}; {AMBIENCE#GENERAL,không gian,positive,thoáng mát}
 
 #357
 phục vụ tạm ổn giữ xe miễn phí giá hơi cao nhưng chấp nhận được
@@ -1520,7 +1520,7 @@ không gian qán tốt nhân viên phục vụ cũng đc piza thì giá cũng bt
 
 #381
 giá nước hơi mắc mà chất lượng thì cũng tạm được thôi à
-{DRINKS#PRICES,giá nước,negative,mắt}; {DRINKS#QUALITY,chất lượng,neutral,tạm được}
+{DRINKS#PRICES,giá nước,negative,mắc}; {DRINKS#QUALITY,chất lượng,neutral,tạm được}
 
 #382
 lên món khá nhanh nhưng thái độ thấy không được vui vẻ lắm, đồ ăn thì đa dạng
@@ -1648,7 +1648,7 @@ phục vụ lúc đông khách thì chờ đồ ăn khá lâu món ăn đa dạn
 
 #413
 món ăn lên hơi lâu nên đợi thấy mệt, đồ ăn ở đây khá đa dạng, có cả đồ ngọt lẫn đồ mặn luôn nhé, tuy nhiên chất lượng đồ ăn mình chưa đánh giá cao lắm
-{SERVICE#GENERAL,phục vụ,positive,vui vẻ}; {SERVICE#GENERAL,món ăn lên,negative,lâu}; {FOOD#STYLE&OPTIONS,đồ ăn,positive,đa dạng}; {FOOD#QUALITY,chất lượng đồ ăn,neutral,null}
+{SERVICE#GENERAL,món ăn lên,negative,lâu}; {FOOD#STYLE&OPTIONS,đồ ăn,positive,đa dạng}; {FOOD#QUALITY,chất lượng đồ ăn,neutral,null}
 
 #414
 đồ ăn tạm chấp nhận được so với mức giá nhưng phục vụ chậm không chuyên nghiệp và hay quên món
@@ -1760,7 +1760,7 @@ phục vụ rất tệ quầy line hầu như không fill phục vụ rất ch�
 
 #441
 pizza ở đây thì ngon đầy đặn nhưng nhân khá ít
-{FOOD#QUALITY,pizaa,positive,ngon}; {FOOD#STYLE&OPTIONS,nhân,negative,ít}; {FOOD#STYLE&OPTIONS,pizza,positive,đầy đặn}
+{FOOD#QUALITY,pizza,positive,ngon}; {FOOD#STYLE&OPTIONS,nhân,negative,ít}; {FOOD#STYLE&OPTIONS,pizza,positive,đầy đặn}
 
 #442
 đồ ăn thì rất ngon nhưng nhân viên càng ngày càng tệ hơn
@@ -1900,7 +1900,7 @@ nhà hàng phục vụ nước rất lâu kêu nước nhiều lần lắm mới
 
 #476
 đồ ăn ngon giá vừa phải quán cũng nhỏ nhưng xinh xinh
-{FOOD#QUALITY,đồ ăn,positive,ngon}; {RESTAURANT#PRICES,giá,neutral,vừa phải}; {SERVICE#GENERAL,nv,positive,nhiều}; {RESTAURANT#GENERAL,quán,negative,nhỏ}; {AMBIENCE#GENERAL,quán,positive,xinh xinh}
+{FOOD#QUALITY,đồ ăn,positive,ngon}; {RESTAURANT#PRICES,giá,neutral,vừa phải}; {RESTAURANT#GENERAL,quán,negative,nhỏ}; {AMBIENCE#GENERAL,quán,positive,xinh xinh}
 
 #477
 nước uống thì bình thường 👌🏻 phục vụ gọi không thấy đâu 👌🏻giá cả từ 59k.
@@ -1912,7 +1912,7 @@ không gian thoáng đãng nhưng yên tĩnh sang trọng dù nhìn kỹ nhỏ t
 
 #479
 ▪️không gian, vị trí quán nhỏ nhỏ, ấm cúng dễ tìm gần bitexco và trước cửa quán có chỗ để xe
-{AMBIENCE#GENERAL,không gian,positive,nhỏ nhỏ ấm cúng}; {LOCATION#GENERAL,vị trí,positive,dễ tìm}; {RESTAURANT#MISCELLANEOUS,chỗ để xe,neutral,null}
+{AMBIENCE#GENERAL,không gian,positive,ấm cúng}; {AMBIENCE#GENERAL,không gian,positive,nhỏ nhỏ}; {LOCATION#GENERAL,vị trí,positive,dễ tìm}; {RESTAURANT#MISCELLANEOUS,chỗ để xe,neutral,null}
 
 #480
 không gian yên tĩnh nhưng giá chỗ này hơi cao chút nhưng thèm thì sẽ đến nữa vì chỗ này chắc là ngon nhất sài gòn

@@ -364,7 +364,7 @@ vị trí tầng dưới khó thấy nhỏ hẹp không được rỗng rãi l�
 
 #92
 không gian quán hơi nhỏ so với mặt bằng chung các quán khác giá cả hợp lí nhìn chung thì bufet lẩu ở đây cũng ok nhân viên phục vụ nhiệt tình nhanh nhẹ niềm nở
-{SERVICE#GENERAL,nhân viên phục vụ,positive,nhiệt tình nhanh nhẹ niềm nở}; {FOOD#QUALITY,buffet lẩu,neutral,ok}; {RESTAURANT#PRICES,giá cả,positive,hợp lí}; {AMBIENCE#GENERAL,không gian,negative,nhỏ}
+{SERVICE#GENERAL,nhân viên phục vụ,positive,nhiệt tình nhanh nhẹ niềm nở}; {FOOD#QUALITY,bufet lẩu,neutral,ok}; {RESTAURANT#PRICES,giá cả,positive,hợp lí}; {AMBIENCE#GENERAL,không gian,negative,nhỏ}
 
 #93
 không gian ở đây đẹp nhưng nói chung mình không thích quán này lắm
@@ -852,7 +852,7 @@ không gian cũng rộng, phục vụ chu đáo, giá cả vừa phải
 
 #214
 đồ ăn dọn ra ngon trình bày đẹp không có ly trà đá nước lọc nhỏ dọn kèm không tăm không khăn giấy không khăn ướt như một số quán cafe có phục vụ đồ ăn khác
-{FOOD#QUALITY,đồ ăn,positive,ngon}; {FOOD#STYLE&OPTIONS,trình bày,positive,đẹp}; {RESTAURANT#MISCELLANEOUS,tăm,negative,null}; {RESTAURANT#MISCELLANEOUS,khăn giấy,negative,null}; {RESTAURANT#MISCELLANEOUS,khăn ướt,negative,null}; {DRINKS#STYLE&OPTIONS,ly trà đá,negative,nhỏ}; {DRINKS#STYLE&OPTIONS,ly nước lọc,negative,nhỏ}
+{FOOD#QUALITY,đồ ăn,positive,ngon}; {FOOD#STYLE&OPTIONS,trình bày,positive,đẹp}; {RESTAURANT#MISCELLANEOUS,tăm,negative,null}; {RESTAURANT#MISCELLANEOUS,khăn giấy,negative,null}; {RESTAURANT#MISCELLANEOUS,khăn ướt,negative,null}; {DRINKS#STYLE&OPTIONS,ly trà đá,negative,nhỏ}; {DRINKS#STYLE&OPTIONS,nước lọc,negative,nhỏ}
 
 #215
 chất lượng menu thức uống không đa dạng như những thương hiệu khác nhưng bù lại loại nước nào cũng ngon

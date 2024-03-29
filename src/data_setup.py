@@ -12,6 +12,34 @@ from torch.utils.data import DataLoader, Dataset
 from transformers import PreTrainedTokenizerFast, BatchEncoding
 from tokenizers import Encoding
 
+@dataclass
+class RawExample:
+    id: str
+    text: str
+    labels: str
+
+@dataclass
+class LabelDict:
+    aspect_category: str
+    sentiment: str
+    target: Dict
+    opinion: Dict
+
+@dataclass
+class ProcessedExample:
+    id: str
+    text: str
+    labels: List[LabelDict]
+
+@dataclass
+class InputExample:
+    example_id: str
+    input_ids: List[int]
+    token_type_ids: List[int]
+    attention_mask: List[int]
+    ner_mask: List[int]
+    acs_label: int = None
+    ner_labels: List[int] = None
 
 class LabelSet:
   def __init__(self, labels: List[str]):
@@ -39,20 +67,6 @@ class LabelSet:
     raw_labels = align_tokens_and_annotations_bio(tokenized_text, annotations)
     return list(map(self.labels_to_id.get, raw_labels))
 
-@dataclass
-class RawExample:
-    id: str
-    text: str
-    labels: str
-    
-@dataclass
-class ProcessedExample:
-    id: str
-    text: str
-    aspect_category: str
-    sentiment: str
-    target: Dict
-    opinion: Dict
 
 
 class DataProcessor:
@@ -86,28 +100,26 @@ class DataProcessor:
         processed_examples: List[ProcessedExample] = []
         for example in tqdm(examples, desc='[INFO] Loading data...'):
             annotations = process_label(example.text, example.labels)
+            labels: LabelDict = []
             for idx, anno in enumerate(annotations):
-                processed_examples.append(
-                    ProcessedExample(
-                        id=f'{example.id}:{idx}',
-                        text=example.text,
+                labels.append(
+                    LabelDict(
                         aspect_category=anno['aspect_category'],
                         sentiment=anno['sentiment'],
                         target=anno['target'],
                         opinion=anno['opinion']
                     )
                 )
+            processed_examples.append(
+                ProcessedExample(
+                    id=example.id,
+                    text=example.text,
+                    labels=labels
+                )
+            )
         return processed_examples
     
-@dataclass
-class InputExample:
-    example_id: str
-    input_ids: List[int]
-    token_type_ids: List[int]
-    attention_mask: List[int]
-    ner_mask: List[int]
-    acs_label: int = None
-    ner_labels: List[int] = None
+
 
 class TrainingDataset(Dataset):
     def __init__(self,
@@ -131,39 +143,29 @@ class TrainingDataset(Dataset):
         total_examples: List[InputExample] = []
         input_examples: List[InputExample] = []   
         for example in tqdm(examples, desc='[INFO] Processing data...'):
-            if (pre_id != example.id):
-                for ac_s in self.compose_set:
-                    example_id = example.id.split(':')[0] + f':{self.compose_to_id[ac_s]}'
-                    tokenized: Encoding = self.tokenizer(example.text, ac_s, padding='max_length', max_length=self.max_seq_length)[0]
-                    ner_mask = get_ner_mask(tokenized, self.max_seq_length)
-                    if ac_s == normalize_label(example.aspect_category, example.sentiment):
-                        acs_label = 1
-                        ner_labels = self.label_set.get_aligned_label_ids_from_annotations(tokenized, [example.target, example.opinion])
-                    else:
-                        acs_label = 0
-                        ner_labels = self.label_set.labels_to_id['O'] * sum(ner_mask)
-
-                    input_examples.append(
-                        InputExample(
-                            example_id=example_id,
-                            input_ids=tokenized.ids,
-                            token_type_ids=tokenized.type_ids,
-                            attention_mask=tokenized.attention_mask,
-                            ner_mask=ner_mask,
-                            acs_label=acs_label,
-                            ner_labels=ner_labels
-                        )
-                    )
-                is_first = False
-                pre_id = example_id
-            else:
-                ac_s = normalize_label(example.aspect_category, example.sentiment)
-                acs_id = self.compose_to_id[ac_s]
+            for ac_s in self.compose_set:
+                example_id = example.id.split(':')[0] + f':{self.compose_to_id[ac_s]}'
                 tokenized: Encoding = self.tokenizer(example.text, ac_s, padding='max_length', max_length=self.max_seq_length)[0]
-                for input_example in input_examples:
-                    if acs_id == input_example.id.split(':')[-1]:
-                        input_example.acs_label = 1
-                        input_example.ner_labels = self.label_set.get_aligned_label_ids_from_annotations(tokenized, [example.target, example.opinion])
+                ner_mask = get_ner_mask(tokenized, self.max_seq_length)
+                if ac_s == normalize_label(example.aspect_category, example.sentiment):
+                    acs_label = 1
+                    ner_labels = self.label_set.get_aligned_label_ids_from_annotations(tokenized, [example.target, example.opinion])
+                else:
+                    acs_label = 0
+                    ner_labels = self.label_set.labels_to_id['O'] * sum(ner_mask)
+
+                input_examples.append(
+                    InputExample(
+                        example_id=example_id,
+                        input_ids=tokenized.ids,
+                        token_type_ids=tokenized.type_ids,
+                        attention_mask=tokenized.attention_mask,
+                        ner_mask=ner_mask,
+                        acs_label=acs_label,
+                        ner_labels=ner_labels
+                    )
+                )
+        return total_examples
             
 
     def __len__(self):
@@ -182,5 +184,7 @@ def main():
     from transformers import AutoTokenizer
     tokenizer = AutoTokenizer.from_pretrained('trituenhantaoio/bert-base-vietnamese-uncased')
     training_dataset = TrainingDataset(processor.train_examples, label_set, compose_set, tokenizer, 128)
+    training_dataset = TrainingDataset(processor.dev_examples, label_set, compose_set, tokenizer, 128)
+    training_dataset = TrainingDataset(processor.test_examples, label_set, compose_set, tokenizer, 128)
 if __name__ == "__main__":
   main()

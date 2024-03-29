@@ -89,6 +89,9 @@ def get_acs(aspect_category_path, sentiment_path):
 
     return compose_set
 
+def generate_acs_examples(tokenized, compose_set):
+    raise NotImplementedError
+
 
 def main():
     print("[INFO] Testing...")
