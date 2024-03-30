@@ -2,7 +2,37 @@ import re
 import itertools
 import argparse
 
+from dataclasses import dataclass
+from typing import List, Dict
 from tokenizers import Encoding
+
+@dataclass
+class RawExample:
+    id: str
+    text: str
+    labels: str
+
+@dataclass
+class LabelDict:
+    aspect_category: str
+    sentiment: str
+    target: Dict
+    opinion: Dict
+
+@dataclass
+class ProcessedExample:
+    id: str
+    text: str
+    labels: List[LabelDict]
+
+@dataclass
+class InputExample:
+    example_id: str
+    input_ids: List[int]
+    attention_mask: List[int]
+    ner_mask: List[int]
+    acs_label: int = None
+    ner_labels: List[int] = None
 
 def process_label(text, labels):
     annotations = []
@@ -31,29 +61,20 @@ def extract_span(text, unit):
     return (start, end)
 
 
-def align_tokens_and_annotations_bio(tokenized: Encoding, annotations):
-    tokens = tokenized.tokens
-    aligned_labels =  ['O'] * len(tokens)
-    aligned_labels[0] = "[CLS]"
-
+def align_tokens_and_annotations_bio(tokenized: Encoding, ner_labels, annotations: LabelDict, ids_to_label):
+    aligned_labels = list(map(ids_to_label.get, ner_labels))
+    annotations = [annotations.target, annotations.opinion]
     for anno in annotations:
         if anno['text'] == 'null':
-          continue
+            continue
         annotation_token_idx_set = set()
         for char_idx in range(anno['start'], anno['end']):
-            try:
-                token_idx = tokenized.char_to_token(char_idx)
-            except:
-                print(tokenized.tokens)
-                print(anno)
-                print(char_idx)
-                print(anno['start'])
-                print(anno['end'])
-                exit()
+            token_idx = tokenized.char_to_token(char_idx)
+
             if token_idx is not None:
                 annotation_token_idx_set.add(token_idx)
 
-      
+        
         for num, token_idx in enumerate(sorted(annotation_token_idx_set)):
             if num == 0:
                 prefix = 'B'
@@ -63,9 +84,8 @@ def align_tokens_and_annotations_bio(tokenized: Encoding, annotations):
 
     return aligned_labels
 
-def get_ner_mask(tokenized: Encoding, max_seq_length: int):
-    segment_ids = tokenized.type_ids
-    sep_idx = segment_ids.index(1) - 1
+def get_ner_mask(tokenized: Encoding, max_seq_length: int, sep_id: int):
+    sep_idx = tokenized.ids.index(sep_id)
     ner_mask = [1] * sep_idx + [0] * (max_seq_length - sep_idx)
 
     return ner_mask
@@ -88,9 +108,7 @@ def get_acs(aspect_category_path, sentiment_path):
         compose_set.append(normalize_label(aspect_category, sentiment))
 
     return compose_set
-
-def generate_acs_examples(tokenized, compose_set):
-    raise NotImplementedError
+     
 
 
 def main():
