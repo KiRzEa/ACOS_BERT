@@ -7,7 +7,7 @@ from ftfy import fix_text
 from data_utils import *
 
 import torch
-from torch.utils.data import DataLoader, Dataset
+from torch.utils.data import DataLoader, Dataset, TensorDataset
 
 from transformers import PreTrainedTokenizerFast, BatchEncoding
 from tokenizers import Encoding
@@ -108,7 +108,15 @@ class TrainingDataset(Dataset):
         self.compose_to_id = {compose: str(idx) for idx, compose in enumerate(compose_set)}
         self.id_to_compose = {str(idx): compose for idx, compose in enumerate(compose_set)}
         self.sep_id = self.tokenizer.convert_tokens_to_ids('[SEP]')
-        self.examples = self.process(examples)
+        self.examples: List[InputExample] = self.process(examples)
+
+        all_input_ids = torch.LongTensor([f.input_ids for f in self.examples])
+        all_attention_masks = torch.LongTensor([f.attention_mask for f in self.examples])
+        all_acs_labels = torch.LongTensor([f.acs_label for f in self.examples])
+        all_ner_labels = torch.LongTensor([f.ner_labels for f in self.examples])
+        all_ner_masks = torch.LongTensor([f.ner_mask for f in self.examples])
+
+        self.data = TensorDataset(all_input_ids, all_attention_masks, all_ner_masks, all_acs_labels, all_ner_labels, )
 
     def process(self, examples: List[ProcessedExample]):
         total_examples: List[InputExample] = []
@@ -148,21 +156,11 @@ class TrainingDataset(Dataset):
         return acs_examples 
 
     def __len__(self):
-        return len(self.examples)
+        return len(self.data)
     
     def __getitem__(self, idx):
-        return self.examples[idx]
+        return self.examples[idx].example_id, self.data[idx]
 
-class TrainingBatch:
-    def __init__(self, examples: List[InputExample]):
-        self.input_ids = torch.LongTensor([example.input_ids for example in examples])
-        self.attention_mask = torch.LongTensor([example.attention_mask for example in examples])
-        self.ner_mask = torch.LongTensor([example.ner_mask for example in examples])
-        self.acs_label = torch.LongTensor([example.acs_label for example in examples])
-        self.ner_labels = torch.LongTensor([example.ner_labels for example in examples])
-
-    def __getitem__(self, item):
-        return getattr(self, item)
 
 def main():
     import warnings
@@ -174,9 +172,11 @@ def main():
     from transformers import AutoTokenizer
     tokenizer = AutoTokenizer.from_pretrained('trituenhantaoio/bert-base-vietnamese-uncased')
     training_dataset = TrainingDataset(processor.dev_examples, label_set, compose_set, tokenizer, 128)
-    train_dataloader = DataLoader(training_dataset, collate_fn=TrainingBatch, batch_size=len(compose_set), num_workers=os.cpu_count())
-    for batch in train_dataloader:
-        print(batch.input_ids.shape)
+    train_dataloader = DataLoader(training_dataset, batch_size=len(compose_set), num_workers=os.cpu_count())
+
+    for batch, id in train_dataloader:
+        print(id)
+        print(batch)
         break
     # training_dataset = TrainingDataset(processor.dev_examples, label_set, compose_set, tokenizer, 128)
     # # training_dataset = TrainingDataset(processor.test_examples, label_set, compose_set, tokenizer, 128)

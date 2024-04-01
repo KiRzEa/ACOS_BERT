@@ -32,8 +32,8 @@ class BertForTABSAJoint_CRF(nn.Module):
 				module.bias.data.zero_()
 		self.apply(init_weights)
 
-	def forward(self, input_ids, token_type_ids, attention_mask, ner_mask, labels=None, ner_labels=None, inference=False):
-		outputs = self.bert(input_ids, token_type_ids, attention_mask)
+	def forward(self, input_ids, attention_mask, ner_mask, acs_labels=None, ner_labels=None, inference=False):
+		outputs = self.bert(input_ids, attention_mask)
 		sequence_output = outputs.last_hidden_state
 		pooled_output = outputs.pooler_output
 		# get the last hidden layer
