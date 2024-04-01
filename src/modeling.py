@@ -52,7 +52,7 @@ class BertForTABSAJoint_CRF(nn.Module):
 		# the classifier of category & polarity
 		if not inference:
 			loss_fct = CrossEntropyLoss()
-			loss = loss_fct(logits, labels)
+			loss = loss_fct(logits, acs_labels)
 			ner_loss_list = self.CRF_model(ner_logits, ner_labels, ner_mask.type(torch.ByteTensor).cuda(), reduction='none')
 			ner_loss = torch.mean(-ner_loss_list)
 			

@@ -101,6 +101,7 @@ class TrainingDataset(Dataset):
                  tokenizer: PreTrainedTokenizerFast,
                  max_seq_length: int
                  ):
+        self.raw_examples: List[ProcessedExample] = examples
         self.label_set = label_set
         self.tokenizer = tokenizer
         self.compose_set = compose_set
@@ -159,7 +160,10 @@ class TrainingDataset(Dataset):
         return len(self.data)
     
     def __getitem__(self, idx):
-        return self.examples[idx].example_id, self.data[idx]
+        for example in self.raw_examples:
+            example_id = self.examples[idx].example_id.split(':')
+            if example.id == example_id[0]:
+                return self.examples[idx].example_id, example.text, self.id_to_compose[example_id[1]], self.data[idx]
 
 
 def main():
@@ -174,9 +178,8 @@ def main():
     training_dataset = TrainingDataset(processor.dev_examples, label_set, compose_set, tokenizer, 128)
     train_dataloader = DataLoader(training_dataset, batch_size=len(compose_set), num_workers=os.cpu_count())
 
-    for batch, id in train_dataloader:
-        print(id)
-        print(batch)
+    for example_id, text, acs, batch in train_dataloader:
+        print(acs)
         break
     # training_dataset = TrainingDataset(processor.dev_examples, label_set, compose_set, tokenizer, 128)
     # # training_dataset = TrainingDataset(processor.test_examples, label_set, compose_set, tokenizer, 128)
