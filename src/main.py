@@ -3,7 +3,7 @@ import argparse
 import warnings
 warnings.filterwarnings('ignore')
 
-from engine import *
+from engine import train
 from data_setup import *
 from modeling import *
 

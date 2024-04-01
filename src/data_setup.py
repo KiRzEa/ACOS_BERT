@@ -1,9 +1,10 @@
+import os
 import itertools
 from typing import List, Dict
 from tqdm.auto import tqdm
 from ftfy import fix_text
 
-from utils import *
+from data_utils import *
 
 import torch
 from torch.utils.data import DataLoader, Dataset
@@ -147,19 +148,36 @@ class TrainingDataset(Dataset):
         return acs_examples 
 
     def __len__(self):
-        return len(self.data)
+        return len(self.examples)
     
     def __getitem__(self, idx):
-        return self.data[idx]
+        return self.examples[idx]
+
+class TrainingBatch:
+    def __init__(self, examples: List[InputExample]):
+        self.input_ids = torch.LongTensor([example.input_ids for example in examples])
+        self.attention_mask = torch.LongTensor([example.attention_mask for example in examples])
+        self.ner_mask = torch.LongTensor([example.ner_mask for example in examples])
+        self.acs_label = torch.LongTensor([example.acs_label for example in examples])
+        self.ner_labels = torch.LongTensor([example.ner_labels for example in examples])
+
+    def __getitem__(self, item):
+        return getattr(self, item)
 
 def main():
+    import warnings
+    warnings.filterwarnings('ignore')
     processor = DataProcessor('../data/ViRes')
     label_set = LabelSet(['Target', 'Opinion'])
     compose_set = get_acs('../data/ViRes/aspect_category_set.txt', '../data/ViRes/sentiment_set.txt')
 
-    # from transformers import AutoTokenizer
-    # tokenizer = AutoTokenizer.from_pretrained('trituenhantaoio/bert-base-vietnamese-uncased')
-    # # training_dataset = TrainingDataset(processor.train_examples, label_set, compose_set, tokenizer, 128)
+    from transformers import AutoTokenizer
+    tokenizer = AutoTokenizer.from_pretrained('trituenhantaoio/bert-base-vietnamese-uncased')
+    training_dataset = TrainingDataset(processor.dev_examples, label_set, compose_set, tokenizer, 128)
+    train_dataloader = DataLoader(training_dataset, collate_fn=TrainingBatch, batch_size=len(compose_set), num_workers=os.cpu_count())
+    for batch in train_dataloader:
+        print(batch.input_ids.shape)
+        break
     # training_dataset = TrainingDataset(processor.dev_examples, label_set, compose_set, tokenizer, 128)
     # # training_dataset = TrainingDataset(processor.test_examples, label_set, compose_set, tokenizer, 128)
     # for example in tqdm(processor.dev_examples):
