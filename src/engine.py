@@ -22,12 +22,10 @@ def train_step(model: BertForTABSAJoint_CRF,
     train_loss = 0.
     train_ner_loss = 0.
     train_acc = 0.
-
     progress_bar = tqdm(
         enumerate(dataloader),
         desc='Training',
         total=len(dataloader),
-        dynamic_ncols=True,
     )
     for step, (_, _, _, batch) in progress_bar:
         batch = tuple(t.to(device) for t in batch)
@@ -38,18 +36,11 @@ def train_step(model: BertForTABSAJoint_CRF,
                                      acs_labels=acs_labels,
                                      ner_labels=ner_labels)
 
-        if hparams['gradient_accumulation_steps'] > 1:
-            loss = loss / hparams['gradient_accumulation_steps']
-            ner_loss = ner_loss / hparams['gradient_accumulation_steps']
-        loss.backward(retain_graph=True)
+        loss.backward()
         ner_loss.backward()
 
         train_loss += loss
         train_ner_loss += ner_loss
-        if (step + 1) % hparams['gradient_accumulation_steps'] == 0:
-            optimizer.step()
-            scheduler.step()
-            model.zero_grad()
         
         progress_bar.set_postfix(
             {
@@ -80,7 +71,6 @@ def test_step(model: BertForTABSAJoint_CRF,
         enumerate(dataloader),
         desc='Evaluating',
         total=len(dataloader),
-        dynamic_ncols=True
     )
     with open(output_dir, f'test_pre_epoch_{epoch+1}.txt', 'w') as f:
         f.write('example_id\ttext\tacs\tacs_label\tacs_predict\tner_labels\tner_predictions')

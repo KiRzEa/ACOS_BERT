@@ -181,7 +181,21 @@ def main():
 
     training_dataset = SupervisedDataset(processor.train_examples, label_set, compose_set, tokenizer, 128)
     train_dataloader = DataLoader(training_dataset, batch_size=32, num_workers=os.cpu_count())
-    print(len(train_dataloader))
+    
+    from tqdm.auto import tqdm
+    progress_bar = tqdm(
+        enumerate(train_dataloader),
+        desc='Trainig',
+        total=len(train_dataloader)
+    )
+    import random
+    for _, (_, _, _, batch) in progress_bar:
+        progress_bar.set_postfix(
+            {
+                'something': random.randint(5, 10)
+            }
+        )
+        continue
     # training_dataset = TrainingDataset(processor.dev_examples, label_set, compose_set, tokenizer, 128)
     # # training_dataset = TrainingDataset(processor.test_examples, label_set, compose_set, tokenizer, 128)
     # for example in tqdm(processor.dev_examples):
