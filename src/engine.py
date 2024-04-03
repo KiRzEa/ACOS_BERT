@@ -5,7 +5,7 @@ from pathlib import Path
 import torch
 from torch.utils.tensorboard.writer import SummaryWriter
 from torch.utils.data import DataLoader, TensorDataset
-from transformers import PreTrainedModel, PreTrainedTokenizerm, get_scheduler, SchedulerType
+from transformers import PreTrainedModel, PreTrainedTokenizer, get_scheduler, SchedulerType
 from modeling import BertForTABSAJoint_CRF
 
 from sklearn.metrics import *
