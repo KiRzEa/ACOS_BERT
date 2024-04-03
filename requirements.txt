@@ -2,3 +2,4 @@ pytorch-crf
 transformers[sentence-piece]
 tokenizers
 accelerate
+ftfy
