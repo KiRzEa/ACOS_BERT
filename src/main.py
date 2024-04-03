@@ -99,9 +99,9 @@ def main():
     logger.info("  Num steps = %d", num_train_steps)
 
     # -------- Dataset --------
-    train_dataset = SupervisedDataset(train_examples, label_set, compose_set, tokenizer, args.max_seq_length)
-    dev_dataset = SupervisedDataset(dev_examples, label_set, compose_set, tokenizer, args.max_seq_length)
-    test_dataset = SupervisedDataset(test_examples, label_set, compose_set, tokenizer, args.max_seq_length)
+    train_dataset = SupervisedDataset(train_examples, label_set, compose_set, tokenizer, args.max_seq_length, end_token='</s>')
+    dev_dataset = SupervisedDataset(dev_examples, label_set, compose_set, tokenizer, args.max_seq_length, end_token='</s>')
+    test_dataset = SupervisedDataset(test_examples, label_set, compose_set, tokenizer, args.max_seq_length, end_token='</s>')
 
     # -------- DataLoader --------
     train_dataloader = DataLoader(train_dataset)

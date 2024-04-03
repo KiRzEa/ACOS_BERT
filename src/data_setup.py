@@ -99,7 +99,8 @@ class SupervisedDataset(Dataset):
                  label_set: LabelSet,
                  compose_set: List[str],
                  tokenizer: PreTrainedTokenizerFast,
-                 max_seq_length: int
+                 max_seq_length: int,
+                 end_token: str = '[SEP]'
                  ):
         self.raw_examples: List[ProcessedExample] = examples
         self.label_set = label_set
@@ -108,7 +109,7 @@ class SupervisedDataset(Dataset):
         self.max_seq_length = max_seq_length
         self.compose_to_id = {compose: str(idx) for idx, compose in enumerate(compose_set)}
         self.id_to_compose = {str(idx): compose for idx, compose in enumerate(compose_set)}
-        self.sep_id = self.tokenizer.convert_tokens_to_ids('[SEP]')
+        self.sep_id = self.tokenizer.convert_tokens_to_ids(end_token)
         self.examples: List[InputExample] = self.process(examples)
 
         all_input_ids = torch.LongTensor([f.input_ids for f in self.examples])
@@ -174,13 +175,10 @@ def main():
     compose_set = get_acs('../data/ViRes/aspect_category_set.txt', '../data/ViRes/sentiment_set.txt')
 
     from transformers import AutoTokenizer
-    tokenizer = AutoTokenizer.from_pretrained('trituenhantaoio/bert-base-vietnamese-uncased')
-    training_dataset = SupervisedDataset(processor.dev_examples, label_set, compose_set, tokenizer, 128)
+    tokenizer = AutoTokenizer.from_pretrained('uitnlp/visobert')
+    training_dataset = SupervisedDataset(processor.dev_examples, label_set, compose_set, tokenizer, 128, end_token='</s>')
     train_dataloader = DataLoader(training_dataset, batch_size=len(compose_set), num_workers=os.cpu_count())
 
-    for example_id, text, acs, batch in train_dataloader:
-        print(acs)
-        break
     # training_dataset = TrainingDataset(processor.dev_examples, label_set, compose_set, tokenizer, 128)
     # # training_dataset = TrainingDataset(processor.test_examples, label_set, compose_set, tokenizer, 128)
     # for example in tqdm(processor.dev_examples):

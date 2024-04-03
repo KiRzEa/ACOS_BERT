@@ -85,9 +85,13 @@ def align_tokens_and_annotations_bio(tokenized: Encoding, ner_labels, annotation
     return aligned_labels
 
 def get_ner_mask(tokenized: Encoding, max_seq_length: int, sep_id: int):
-    sep_idx = tokenized.ids.index(sep_id)
-    ner_mask = [1] * sep_idx + [0] * (max_seq_length - sep_idx)
-
+    try:
+        sep_idx = tokenized.ids.index(sep_id)
+        ner_mask = [1] * sep_idx + [0] * (max_seq_length - sep_idx)
+    except:
+        print(sep_id)
+        print(tokenized.ids)
+        exit()
     return ner_mask
 
 
