@@ -36,7 +36,7 @@ def train_step(model: BertForTABSAJoint_CRF,
                                      acs_labels=acs_labels,
                                      ner_labels=ner_labels)
 
-        loss.backward()
+        loss.backward(retain_graph=True)
         ner_loss.backward()
 
         train_loss += loss
