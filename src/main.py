@@ -39,6 +39,9 @@ def main():
     parser.add_argument('--experiment_name',
                         default='ACOS_BERT_01',
                         type=str)
+    parser.add_argument('--end_token',
+                        default='[SEP]',
+                        type=str)
     
     # --- TRAINING ARGS ---
     parser.add_argument('--max_seq_length',
@@ -99,9 +102,9 @@ def main():
     logger.info("  Num steps = %d", num_train_steps)
 
     # -------- Dataset --------
-    train_dataset = SupervisedDataset(train_examples, label_set, compose_set, tokenizer, args.max_seq_length, end_token='</s>')
-    dev_dataset = SupervisedDataset(dev_examples, label_set, compose_set, tokenizer, args.max_seq_length, end_token='</s>')
-    test_dataset = SupervisedDataset(test_examples, label_set, compose_set, tokenizer, args.max_seq_length, end_token='</s>')
+    train_dataset = SupervisedDataset(train_examples, label_set, compose_set, tokenizer, args.max_seq_length, end_token=args.end_token)
+    dev_dataset = SupervisedDataset(dev_examples, label_set, compose_set, tokenizer, args.max_seq_length, end_token=args.end_token)
+    test_dataset = SupervisedDataset(test_examples, label_set, compose_set, tokenizer, args.max_seq_length, end_token=args.end_token)
 
     # -------- DataLoader --------
     train_dataloader = DataLoader(train_dataset)
@@ -119,7 +122,7 @@ def main():
 		 ]
 
     optimizer = AdamW(params=optimizer_parameters,
-					  lr=args.learning_rate)
+					  lr=args.lr)
     
     scheduler = get_scheduler(
 		name='linear',
