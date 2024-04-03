@@ -139,7 +139,7 @@ def train(model: BertForTABSAJoint_CRF,
 
     model.to(device)
     
-    for epoch in tqdm(epochs, desc='Iteration'):
+    for epoch in tqdm(range(epochs), desc='Iteration'):
         train_loss, train_ner_loss = train_step(model=model,
                                                 optimizer=optimizer,
                                                 scheduler=scheduler,
