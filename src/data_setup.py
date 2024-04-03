@@ -175,10 +175,13 @@ def main():
     compose_set = get_acs('../data/ViRes/aspect_category_set.txt', '../data/ViRes/sentiment_set.txt')
 
     from transformers import AutoTokenizer
-    tokenizer = AutoTokenizer.from_pretrained('uitnlp/visobert')
-    training_dataset = SupervisedDataset(processor.dev_examples, label_set, compose_set, tokenizer, 128, end_token='</s>')
-    train_dataloader = DataLoader(training_dataset, batch_size=len(compose_set), num_workers=os.cpu_count())
+    tokenizer = AutoTokenizer.from_pretrained('trituenhantaoio/bert-base-vietnamese-uncased')
+    print(tokenizer(processor.train_examples[0].text, processor.train_examples[1].text)[0].ids)
+    print(tokenizer(processor.train_examples[0].text, processor.train_examples[1].text)[0].tokens)
 
+    training_dataset = SupervisedDataset(processor.train_examples, label_set, compose_set, tokenizer, 128)
+    train_dataloader = DataLoader(training_dataset, batch_size=32, num_workers=os.cpu_count())
+    print(len(train_dataloader))
     # training_dataset = TrainingDataset(processor.dev_examples, label_set, compose_set, tokenizer, 128)
     # # training_dataset = TrainingDataset(processor.test_examples, label_set, compose_set, tokenizer, 128)
     # for example in tqdm(processor.dev_examples):

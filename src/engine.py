@@ -10,6 +10,7 @@ from modeling import BertForTABSAJoint_CRF
 
 from sklearn.metrics import *
 
+
 def train_step(model: BertForTABSAJoint_CRF, 
                optimizer: torch.optim.Optimizer, 
                scheduler: SchedulerType,
@@ -25,7 +26,8 @@ def train_step(model: BertForTABSAJoint_CRF,
     progress_bar = tqdm(
         enumerate(dataloader),
         desc='Training',
-        total=len(dataloader)
+        total=len(dataloader),
+        dynamic_ncols=True,
     )
     for step, (_, _, _, batch) in progress_bar:
         batch = tuple(t.to(device) for t in batch)
@@ -77,7 +79,8 @@ def test_step(model: BertForTABSAJoint_CRF,
     progress_bar = tqdm(
         enumerate(dataloader),
         desc='Evaluating',
-        total=len(dataloader)
+        total=len(dataloader),
+        dynamic_ncols=True
     )
     with open(output_dir, f'test_pre_epoch_{epoch+1}.txt', 'w') as f:
         f.write('example_id\ttext\tacs\tacs_label\tacs_predict\tner_labels\tner_predictions')
@@ -139,7 +142,7 @@ def train(model: BertForTABSAJoint_CRF,
 
     model.to(device)
     
-    for epoch in tqdm(range(epochs), desc='Iteration'):
+    for epoch in tqdm(range(epochs), desc='Iteration', dynamic_ncols=True):
         train_loss, train_ner_loss = train_step(model=model,
                                                 optimizer=optimizer,
                                                 scheduler=scheduler,
