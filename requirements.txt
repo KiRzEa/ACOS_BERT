@@ -1,5 +1,5 @@
 pytorch-crf
-transformers[sentence-piece]
+transformers[sentencepiece]
 tokenizers
 accelerate
 ftfy
