@@ -82,6 +82,9 @@ def main():
     tokenizer = AutoTokenizer.from_pretrained(args.model_name)
     config = AutoConfig.from_pretrained(args.model_name)
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    n_gpu = 0
+    if device == 'cuda':
+        n_gpu = torch.cuda.device_count()
 
     processor = DataProcessor(args.data_dir)
     label_set = LabelSet(['Target', 'Opinion'])
@@ -114,6 +117,8 @@ def main():
     # -------- Setup Training --------
 
     model = BertForTABSAJoint_CRF(args.model_name, config, 2, len(label_set.labels_to_id))
+    if n_gpu > 1:
+        model = torch.nn.DataParallel(model)
 
     no_decay = ['bias', 'gamma', 'beta']
     optimizer_parameters = [
@@ -132,7 +137,8 @@ def main():
 							 )
 
     hparams = {
-        'gradient_accumulation_steps': args.gradient_accumulation_steps
+        'gradient_accumulation_steps': args.gradient_accumulation_steps,
+        'n_gpu': n_gpu
     }
     writer = SummaryWriter(os.path.join(args.output_dir, 'runs', args.experiment_name))
 

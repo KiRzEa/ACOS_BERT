@@ -26,7 +26,7 @@ def train_step(model: BertForTABSAJoint_CRF,
         enumerate(dataloader),
         desc='Training',
         total=len(dataloader),
-    )
+        dynamic_ncols=True)
     for step, (_, _, _, batch) in progress_bar:
         batch = tuple(t.to(device) for t in batch)
         input_ids, attention_mask, ner_mask, acs_labels, ner_labels = batch
@@ -35,6 +35,10 @@ def train_step(model: BertForTABSAJoint_CRF,
                                      ner_mask=ner_mask,
                                      acs_labels=acs_labels,
                                      ner_labels=ner_labels)
+        
+        if hparams['n_gpu'] > 1:
+            loss = loss.mean()
+            ner_loss = ner_loss.mean()
 
         loss.backward(retain_graph=True)
         ner_loss.backward()
@@ -71,6 +75,7 @@ def test_step(model: BertForTABSAJoint_CRF,
         enumerate(dataloader),
         desc='Evaluating',
         total=len(dataloader),
+        dynamic_ncols=True
     )
     with open(output_dir, f'test_pre_epoch_{epoch+1}.txt', 'w') as f:
         f.write('example_id\ttext\tacs\tacs_label\tacs_predict\tner_labels\tner_predictions')
