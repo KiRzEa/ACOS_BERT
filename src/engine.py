@@ -12,7 +12,6 @@ from sklearn.metrics import *
 
 def train_step(model: BertForTABSAJoint_CRF, 
                optimizer: torch.optim.Optimizer, 
-               loss_fn: torch.nn.Module, 
                scheduler: SchedulerType,
                dataloader: DataLoader,
                device: torch.device,
@@ -36,9 +35,7 @@ def train_step(model: BertForTABSAJoint_CRF,
                                      ner_mask=ner_mask,
                                      acs_labels=acs_labels,
                                      ner_labels=ner_labels)
-        if hparams['n_gpu'] > 1:
-            loss = loss.mean()
-            ner_loss = ner_loss.mean()
+
         if hparams['gradient_accumulation_steps'] > 1:
             loss = loss / hparams['gradient_accumulation_steps']
             ner_loss = ner_loss / hparams['gradient_accumulation_steps']
@@ -124,7 +121,6 @@ def test_step(model: BertForTABSAJoint_CRF,
 
 def train(model: BertForTABSAJoint_CRF,
           optimizer: torch.optim,
-          loss_fn: torch.nn.Module,
           scheduler: SchedulerType,
           train_dataloader: DataLoader,
           test_dataloader: DataLoader,
@@ -146,14 +142,12 @@ def train(model: BertForTABSAJoint_CRF,
     for epoch in tqdm(epochs, desc='Iteration'):
         train_loss, train_ner_loss = train_step(model=model,
                                                 optimizer=optimizer,
-                                                loss_fn=loss_fn,
                                                 scheduler=scheduler,
                                                 dataloader=train_dataloader,
                                                 device=device,
                                                 hparams=hparams)
         test_loss, test_ner_loss, test_acc = test_step(model=model,
                                                        optimizer=optimizer,
-                                                       loss_fn=loss_fn,
                                                        scheduler=scheduler,
                                                        dataloader=test_dataloader,
                                                        device=device,

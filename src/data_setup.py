@@ -93,7 +93,7 @@ class DataProcessor:
     
 
 
-class TrainingDataset(Dataset):
+class SupervisedDataset(Dataset):
     def __init__(self,
                  examples: List[ProcessedExample],
                  label_set: LabelSet,
@@ -175,7 +175,7 @@ def main():
 
     from transformers import AutoTokenizer
     tokenizer = AutoTokenizer.from_pretrained('trituenhantaoio/bert-base-vietnamese-uncased')
-    training_dataset = TrainingDataset(processor.dev_examples, label_set, compose_set, tokenizer, 128)
+    training_dataset = SupervisedDataset(processor.dev_examples, label_set, compose_set, tokenizer, 128)
     train_dataloader = DataLoader(training_dataset, batch_size=len(compose_set), num_workers=os.cpu_count())
 
     for example_id, text, acs, batch in train_dataloader:

@@ -1,17 +1,29 @@
+import os
+import logging
 import argparse
 
 import warnings
 warnings.filterwarnings('ignore')
 
+import pandas as pd
 import numpy as np
 import random
 import torch
+from torch.utils.tensorboard.writer import SummaryWriter
 
 from engine import train
+from data_utils import *
 from data_setup import *
 from modeling import *
 
+from transformers import AutoTokenizer, AutoModel, AutoConfig, AdamW, get_scheduler
+
+logging.basicConfig(format = '%(asctime)s - %(levelname)s - %(name)s -   %(message)s',
+					datefmt = '%m/%d/%Y %H:%M:%S',
+					level = logging.INFO)
+
 def main():
+    logger = logging.getLogger(__name__)
     parser = argparse.ArgumentParser()
     
     parser.add_argument('--model_name',
@@ -20,18 +32,18 @@ def main():
                         required=True)
     parser.add_argument('--data_dir',
                         default='../data/ViRes',
-                        type=str,
-                        required=True)
-    parser.add_argument('output_dir',
+                        type=str)
+    parser.add_argument('--output_dir',
                         default='../data/ViRes/output',
-                        type=str,
-                        required=True)
+                        type=str)
+    parser.add_argument('--experiment_name',
+                        default='ACOS_BERT_01',
+                        type=str)
     
     # --- TRAINING ARGS ---
     parser.add_argument('--max_seq_length',
                         default=128,
-                        type=int,
-                        required=True)
+                        type=int)
     parser.add_argument('--train_batch_size',
                         default=32,
                         type=int)
@@ -64,5 +76,78 @@ def main():
     torch.manual_seed(args.seed)
     torch.cuda.manual_seed(args.seed)
 
+    tokenizer = AutoTokenizer.from_pretrained(args.model_name)
+    config = AutoConfig.from_pretrained(args.model_name)
+    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+
+    processor = DataProcessor(args.data_dir)
+    label_set = LabelSet(['Target', 'Opinion'])
+    compose_set = get_acs(os.path.join(args.data_dir, 'aspect_category_set.txt'), os.path.join(args.data_dir, 'sentiment_set.txt'))
+    
+
+    os.makedirs(args.output_dir, exist_ok=True)
+
+    train_examples = processor.train_examples
+    dev_examples = processor.dev_examples
+    test_examples = processor.test_examples
+
+    num_train_steps = int(len(train_examples) / args.train_batch_size * args.epochs)
+
+    logger.info("***** Running training *****")
+    logger.info("  Num examples = %d", len(train_examples))
+    logger.info("  Batch size = %d", args.train_batch_size)
+    logger.info("  Num steps = %d", num_train_steps)
+
+    # -------- Dataset --------
+    train_dataset = SupervisedDataset(train_examples, label_set, compose_set, tokenizer, args.max_seq_length)
+    dev_dataset = SupervisedDataset(dev_examples, label_set, compose_set, tokenizer, args.max_seq_length)
+    test_dataset = SupervisedDataset(test_examples, label_set, compose_set, tokenizer, args.max_seq_length)
+
+    # -------- DataLoader --------
+    train_dataloader = DataLoader(train_dataset)
+    dev_dataloader = DataLoader(dev_dataset)
+    test_dataloader = DataLoader(test_dataset)
+
+    # -------- Setup Training --------
+
+    model = BertForTABSAJoint_CRF(args.model_name, config, 2, len(label_set.labels_to_id))
+
+    no_decay = ['bias', 'gamma', 'beta']
+    optimizer_parameters = [
+		 {'params': [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)], 'weight_decay_rate': 0.01},
+		 {'params': [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay)], 'weight_decay_rate': 0.0}
+		 ]
+
+    optimizer = AdamW(params=optimizer_parameters,
+					  lr=args.learning_rate)
+    
+    scheduler = get_scheduler(
+		name='linear',
+		optimizer=optimizer,
+		num_warmup_steps=int(args.warmup_proportion * num_train_steps),
+		num_training_steps=num_train_steps
+							 )
+
+    hparams = {
+        'gradient_accumulation_steps': args.gradient_accumulation_steps
+    }
+    writer = SummaryWriter(os.path.join(args.output_dir, 'runs', args.experiment_name))
+
+    # ------ Training ------
+    results = train(model=model,
+                    optimizer=optimizer,
+                    scheduler=scheduler,
+                    train_dataloader=train_dataloader,
+                    test_dataloader=test_dataloader,
+                    epochs=args.epochs,
+                    device=device,
+                    hparams=hparams,
+                    writer=writer)
+    
+    pd.DataFrame(results).to_csv(os.path.join(args.output_dir, 'results.csv'), index=False)
+
+    os.makedirs('saved_models', exist_ok=True)
+    torch.save(model, 'saved_models/{args.experiment_name}.bin')
+    
 if __name__ == '__main__':
     main()
