@@ -32,7 +32,6 @@ def train_step(model: BertForTABSAJoint_CRF,
         enumerate(dataloader),
         desc='Training',
         total=len(dataloader),
-        dynamic_ncols=True,
         position=0,
         leave=True)
     
@@ -90,7 +89,6 @@ def test_step(model: BertForTABSAJoint_CRF,
         enumerate(dataloader),
         desc='Evaluating',
         total=len(dataloader),
-        dynamic_ncols=True,
         position=0,
         leave=True
     )
