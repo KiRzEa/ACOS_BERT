@@ -18,6 +18,8 @@ from modeling import *
 
 from transformers import AutoTokenizer, AutoModel, AutoConfig, AdamW, get_scheduler
 
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+
 logging.basicConfig(format = '%(asctime)s - %(levelname)s - %(name)s -   %(message)s',
 					datefmt = '%m/%d/%Y %H:%M:%S',
 					level = logging.INFO)
@@ -74,17 +76,17 @@ def main():
 
     args = parser.parse_args()
     
-    random.seed(args.seed)
-    np.random.seed(args.seed)
-    torch.manual_seed(args.seed)
-    torch.cuda.manual_seed(args.seed)
-
     tokenizer = AutoTokenizer.from_pretrained(args.model_name)
     config = AutoConfig.from_pretrained(args.model_name)
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     n_gpu = 0
     if device == 'cuda':
         n_gpu = torch.cuda.device_count()
+
+    random.seed(args.seed)
+    np.random.seed(args.seed)
+    torch.manual_seed(args.seed)
+    torch.cuda.manual_seed(args.seed)
 
     processor = DataProcessor(args.data_dir)
     label_set = LabelSet(['Target', 'Opinion'])
@@ -110,9 +112,9 @@ def main():
     logger.info("  Num steps = %d", num_train_steps)
 
     # -------- DataLoader --------
-    train_dataloader = DataLoader(train_dataset, batch_size=args.train_batch_size, pin_memory=True, num_workers=os.cpu_count())
-    # dev_dataloader = DataLoader(dev_dataset, batch_size=args.test_batch_size, pin_memory=True, num_workers=os.cpu_count())
-    test_dataloader = DataLoader(test_dataset, batch_size=args.test_batch_size, pin_memory=True, num_workers=os.cpu_count())
+    train_dataloader = DataLoader(train_dataset, batch_size=args.train_batch_size, pin_memory=True)
+    # dev_dataloader = DataLoader(dev_dataset, batch_size=args.test_batch_size, pin_memory=True)
+    test_dataloader = DataLoader(test_dataset, batch_size=args.test_batch_size, pin_memory=True)
 
     # -------- Setup Training --------
 
