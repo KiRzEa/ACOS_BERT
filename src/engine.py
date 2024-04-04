@@ -41,13 +41,15 @@ def train_step(model: BertForTABSAJoint_CRF,
             loss = loss.mean()
             ner_loss = ner_loss.mean()
 
-        model.zero_grad()
+        
 
         loss.backward(retain_graph=True)
         ner_loss.backward()
-        
-        optimizer.step()
-        scheduler.step()
+
+        if (step + 1) % hparams['gradient_accumulation_steps'] == 0:
+            optimizer.step()
+            scheduler.step()
+            model.zero_grad()
 
         train_loss += loss
         train_ner_loss += ner_loss

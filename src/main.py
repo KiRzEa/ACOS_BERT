@@ -94,12 +94,12 @@ def main():
     os.makedirs(args.output_dir, exist_ok=True)
 
     train_examples = processor.train_examples
-    dev_examples = processor.dev_examples
+    # dev_examples = processor.dev_examples
     test_examples = processor.test_examples
 
     # -------- Dataset --------
     train_dataset = SupervisedDataset(train_examples, label_set, compose_set, tokenizer, args.max_seq_length, end_token=args.end_token)
-    dev_dataset = SupervisedDataset(dev_examples, label_set, compose_set, tokenizer, args.max_seq_length, end_token=args.end_token)
+    # dev_dataset = SupervisedDataset(dev_examples, label_set, compose_set, tokenizer, args.max_seq_length, end_token=args.end_token)
     test_dataset = SupervisedDataset(test_examples, label_set, compose_set, tokenizer, args.max_seq_length, end_token=args.end_token)
 
     num_train_steps = int(len(train_dataset) / args.train_batch_size * args.epochs)
@@ -110,9 +110,9 @@ def main():
     logger.info("  Num steps = %d", num_train_steps)
 
     # -------- DataLoader --------
-    train_dataloader = DataLoader(train_dataset, batch_size=args.train_batch_size, num_workers=os.cpu_count())
-    dev_dataloader = DataLoader(dev_dataset, batch_size=args.test_batch_size, num_workers=os.cpu_count())
-    test_dataloader = DataLoader(test_dataset, batch_size=args.test_batch_size, num_workers=os.cpu_count())
+    train_dataloader = DataLoader(train_dataset, batch_size=args.train_batch_size, pin_memory=True, num_workers=os.cpu_count())
+    # dev_dataloader = DataLoader(dev_dataset, batch_size=args.test_batch_size, pin_memory=True, num_workers=os.cpu_count())
+    test_dataloader = DataLoader(test_dataset, batch_size=args.test_batch_size, pin_memory=True, num_workers=os.cpu_count())
 
     # -------- Setup Training --------
 
