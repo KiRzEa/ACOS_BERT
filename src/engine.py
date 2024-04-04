@@ -4,6 +4,7 @@ from typing import Dict, List, Optional
 from pathlib import Path
 
 import torch
+from torch.cuda.amp import GradScaler, autocast
 from torch.utils.tensorboard.writer import SummaryWriter
 from torch.utils.data import DataLoader, TensorDataset
 from transformers import PreTrainedModel, PreTrainedTokenizer, get_scheduler, SchedulerType
@@ -20,39 +21,43 @@ def train_step(model: BertForTABSAJoint_CRF,
                hparams: Dict):
 
     model.train()
+    
+    scaler = GradScaler()
+
     train_loss = 0.
     train_ner_loss = 0.
     train_acc = 0.
+    
     progress_bar = tqdm(
         enumerate(dataloader),
         desc='Training',
         total=len(dataloader),
         dynamic_ncols=True)
+    
     for step, (_, _, _, batch) in progress_bar:
         batch = tuple(t.to(device) for t in batch)
         input_ids, attention_mask, ner_mask, acs_labels, ner_labels = batch
-        loss, ner_loss, _, _ = model(input_ids=input_ids, 
-                                     attention_mask=attention_mask, 
-                                     ner_mask=ner_mask,
-                                     acs_labels=acs_labels,
-                                     ner_labels=ner_labels)
-        
-        if hparams['n_gpu'] > 1:
-            loss = loss.mean()
-            ner_loss = ner_loss.mean()
 
+        optimizer.zero_grad()
+
+        with autocast():
+            loss, ner_loss, _, _ = model(input_ids=input_ids, 
+                                        attention_mask=attention_mask, 
+                                        ner_mask=ner_mask,
+                                        acs_labels=acs_labels,
+                                        ner_labels=ner_labels)
         
 
-        loss.backward(retain_graph=True)
-        ner_loss.backward()
+        scaler.scale(loss).backward(retain_graph=True)
+        scaler.scale(ner_loss).backward(retain_graph=True)
 
         if (step + 1) % hparams['gradient_accumulation_steps'] == 0:
-            optimizer.step()
+            scaler.step(optimizer)
+            scaler.update()
             scheduler.step()
-            model.zero_grad()
 
-        train_loss += loss
-        train_ner_loss += ner_loss
+        train_loss += loss.item()
+        train_ner_loss += ner_loss.item()
         
         progress_bar.set_postfix(
             {
@@ -103,8 +108,8 @@ def test_step(model: BertForTABSAJoint_CRF,
                 for idx in range(len(example_ids)):
                     f.write(f'{example_ids[idx]}\t{texts[idx]}\t{acs[idx]}\t{acs_labels[idx].detach().cpu().numpy()}\t{acs_predictions[idx]}\t{ner_labels[idx].detach().cpu().numpy()}\t{ner_predict[idx]}\n')
                 test_acc += sum(acs_predictions == acs_labels.detach().cpu().numpy()) / len(acs_predictions)
-                test_loss += loss
-                test_ner_loss += ner_loss
+                test_loss += loss.item()
+                test_ner_loss += ner_loss.item()
 
                 progress_bar.set_postfix(
                     {
