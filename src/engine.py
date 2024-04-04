@@ -1,3 +1,4 @@
+import os
 from tqdm.auto import tqdm
 from typing import Dict, List, Optional
 from pathlib import Path
@@ -40,8 +41,13 @@ def train_step(model: BertForTABSAJoint_CRF,
             loss = loss.mean()
             ner_loss = ner_loss.mean()
 
+        model.zero_grad()
+
         loss.backward(retain_graph=True)
         ner_loss.backward()
+        
+        optimizer.step()
+        scheduler.step()
 
         train_loss += loss
         train_ner_loss += ner_loss
@@ -77,45 +83,40 @@ def test_step(model: BertForTABSAJoint_CRF,
         total=len(dataloader),
         dynamic_ncols=True
     )
-    with open(output_dir, f'test_pre_epoch_{epoch+1}.txt', 'w') as f:
-        f.write('example_id\ttext\tacs\tacs_label\tacs_predict\tner_labels\tner_predictions')
-    with torch.inference_mode():
-        for step, (example_ids, texts, acs, batch) in progress_bar:
-            batch = tuple(t.to(device) for t in batch)
-            input_ids, attention_mask, ner_mask, acs_labels, ner_labels = batch
-            loss, ner_loss, logits, ner_predict = model(input_ids=input_ids,
-                                                        attention_mask=attention_mask,
-                                                        ner_mask=ner_mask,
-                                                        acs_labels=acs_labels,
-                                                        ner_labels=ner_labels)
-            
-            acs_predictions = torch.softmax(logits, dim=-1).argmax(dim=-1).detach().cpu().numpy()
-            acs_labels.to('cpu').numpy()
-            ner_labels.to('cpu').numpy()
+    with open(os.path.join(output_dir, f'test_pre_epoch_{epoch+1}.txt'), 'w') as f:
+        f.write('example_id\ttext\tacs\tacs_label\tacs_predict\tner_labels\tner_predictions\n')
+        with torch.inference_mode():
+            for step, (example_ids, texts, acs, batch) in progress_bar:
+                batch = tuple(t.to(device) for t in batch)
+                input_ids, attention_mask, ner_mask, acs_labels, ner_labels = batch
+                loss, ner_loss, logits, ner_predict = model(input_ids=input_ids,
+                                                            attention_mask=attention_mask,
+                                                            ner_mask=ner_mask,
+                                                            acs_labels=acs_labels,
+                                                            ner_labels=ner_labels)
+                
+                acs_predictions = torch.softmax(logits, dim=-1).argmax(dim=-1).detach().cpu().numpy()
+                ner_labels.to('cpu').numpy()
 
-            for idx in range(len(example_ids)):
-                f.write(f'{example_ids[idx]}\t \
-                        {texts[idx]}\t \
-                        {acs[idx]}\t \
-                        {acs_labels[idx]}\t \
-                        {acs_predictions[idx]}\t \
-                        {ner_labels[idx]}\t \
-                        {ner_predict[idx]}\n')
-            test_acc += (acs_predictions == acs_labels).sum() / len(acs_predictions)
-            test_loss += loss
-            test_ner_loss += ner_loss
+                for idx in range(len(example_ids)):
+                    f.write(f'{example_ids[idx]}\t{texts[idx]}\t{acs[idx]}\t{acs_labels[idx].detach().cpu().numpy()}\t{acs_predictions[idx]}\t{ner_labels[idx].detach().cpu().numpy()}\t{ner_predict[idx]}\n')
+                test_acc += sum(acs_predictions == acs_labels.detach().cpu().numpy()) / len(acs_predictions)
+                test_loss += loss
+                test_ner_loss += ner_loss
 
-            progress_bar.set_postfix(
-                {
-                    'test_loss': test_loss.detach().cpu().numpy() / (step + 1),
-                    'test_ner_loss': test_ner_loss.detach().cpu().numpy() / (step + 1),
-                    'test_acc': test_acc / (step + 1)
-                }
-            )
+                progress_bar.set_postfix(
+                    {
+                        'test_loss': test_loss.detach().cpu().numpy() / (step + 1),
+                        'test_ner_loss': test_ner_loss.detach().cpu().numpy() / (step + 1),
+                        'test_acc': test_acc / (step + 1)
+                    }
+                )
         
-        test_loss /= len(dataloader)
-        test_ner_loss /= len(dataloader)
-        test_acc /= len(dataloader)
+            test_loss /= len(dataloader)
+            test_ner_loss /= len(dataloader)
+            test_acc /= len(dataloader)
+    
+    return test_loss, test_ner_loss, test_acc
 
 def train(model: BertForTABSAJoint_CRF,
           optimizer: torch.optim,
@@ -125,6 +126,7 @@ def train(model: BertForTABSAJoint_CRF,
           epochs: int,
           device: torch.device,
           hparams: Dict,
+          output_dir: str,
           writer: SummaryWriter):
     
     results = {
@@ -145,11 +147,10 @@ def train(model: BertForTABSAJoint_CRF,
                                                 device=device,
                                                 hparams=hparams)
         test_loss, test_ner_loss, test_acc = test_step(model=model,
-                                                       optimizer=optimizer,
-                                                       scheduler=scheduler,
                                                        dataloader=test_dataloader,
                                                        device=device,
                                                        hparams=hparams,
+                                                       output_dir=output_dir,
                                                        epoch=epoch)
         
         writer.add_scalars(main_tag="Loss",

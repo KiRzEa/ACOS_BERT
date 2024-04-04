@@ -151,11 +151,12 @@ def main():
                     epochs=args.epochs,
                     device=device,
                     hparams=hparams,
+                    output_dir=args.output_dir,
                     writer=writer)
     
     pd.DataFrame(results).to_csv(os.path.join(args.output_dir, 'results.csv'), index=False)
 
-    os.makedirs('saved_models', exist_ok=True)
+    os.makedirs('../saved_models', exist_ok=True)
     torch.save(model, 'saved_models/{args.experiment_name}.bin')
     
 if __name__ == '__main__':
