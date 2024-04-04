@@ -61,8 +61,8 @@ def train_step(model: BertForTABSAJoint_CRF,
         
         progress_bar.set_postfix(
             {
-                'train_loss': train_loss.detach().cpu().numpy() / (step + 1),
-                'train_ner_loss': train_ner_loss.detach().cpu().numpy() / (step + 1),
+                'train_loss': train_loss / (step + 1),
+                'train_ner_loss': train_ner_loss / (step + 1),
             }
         )
     train_loss /= len(dataloader)
