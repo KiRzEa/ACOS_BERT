@@ -170,10 +170,10 @@ def train(model: BertForTABSAJoint_CRF,
                             tag_scalar_dict={"test_acc": test_acc},
                             global_step=epoch)
         
-        results["train_loss"].append(train_loss.detach().cpu().numpy())
-        results["train_ner_loss"].append(train_ner_loss.detach().cpu().numpy())
-        results["test_loss"].append(test_loss.detach().cpu().numpy())
-        results["test_ner_loss"].append(test_ner_loss.detach().cpu().numpy())
+        results["train_loss"].append(train_loss)
+        results["train_ner_loss"].append(train_ner_loss)
+        results["test_loss"].append(test_loss)
+        results["test_ner_loss"].append(test_ner_loss)
         results["test_acc"].append(test_acc)
 
     writer.close()
