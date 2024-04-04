@@ -113,8 +113,8 @@ def test_step(model: BertForTABSAJoint_CRF,
 
                 progress_bar.set_postfix(
                     {
-                        'test_loss': test_loss.detach().cpu().numpy() / (step + 1),
-                        'test_ner_loss': test_ner_loss.detach().cpu().numpy() / (step + 1),
+                        'test_loss': test_loss / (step + 1),
+                        'test_ner_loss': test_ner_loss / (step + 1),
                         'test_acc': test_acc / (step + 1)
                     }
                 )
