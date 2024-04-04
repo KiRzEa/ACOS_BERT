@@ -32,7 +32,9 @@ def train_step(model: BertForTABSAJoint_CRF,
         enumerate(dataloader),
         desc='Training',
         total=len(dataloader),
-        dynamic_ncols=True)
+        dynamic_ncols=True,
+        position=0,
+        leave=True)
     
     for step, (_, _, _, batch) in progress_bar:
         batch = tuple(t.to(device) for t in batch)
@@ -88,7 +90,9 @@ def test_step(model: BertForTABSAJoint_CRF,
         enumerate(dataloader),
         desc='Evaluating',
         total=len(dataloader),
-        dynamic_ncols=True
+        dynamic_ncols=True,
+        position=0,
+        leave=True
     )
     with open(os.path.join(output_dir, f'test_pre_epoch_{epoch+1}.txt'), 'w') as f:
         f.write('example_id\ttext\tacs\tacs_label\tacs_predict\tner_labels\tner_predictions\n')
