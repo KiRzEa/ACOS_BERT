@@ -6,6 +6,8 @@ from ftfy import fix_text
 
 from data_utils import *
 
+import numpy as np
+
 import torch
 from torch.utils.data import DataLoader, Dataset, TensorDataset
 
@@ -16,6 +18,7 @@ from tokenizers import Encoding
 
 class LabelSet:
   def __init__(self, labels: List[str]):
+    self.labels = labels
     self.labels_to_id = {}
     self.ids_to_label = {}
 
@@ -29,7 +32,8 @@ class LabelSet:
     self.ids_to_label[2] = "O"
 
     num = 2
-    for _num, (label, s) in enumerate(itertools.product(labels, "BI")):
+    for (label, s) in itertools.product(
+        labels, "BI"):
       num += 1
       l = f"{s}-{label}"
       print(num, l)
@@ -118,7 +122,11 @@ class SupervisedDataset(Dataset):
         all_ner_labels = torch.LongTensor([f.ner_labels for f in self.examples])
         all_ner_masks = torch.LongTensor([f.ner_mask for f in self.examples])
 
-        self.data = TensorDataset(all_input_ids, all_attention_masks, all_ner_masks, all_acs_labels, all_ner_labels, )
+        class_count = np.bincount(all_acs_labels)
+        self.class_weights = 1 / torch.tensor(class_count, dtype=torch.float32)
+        self.class_weights /= torch.sum(self.class_weights)
+
+        self.data = TensorDataset(all_input_ids, all_attention_masks, all_ner_masks, all_acs_labels, all_ner_labels)
 
     def process(self, examples: List[ProcessedExample]):
         total_examples: List[InputExample] = []
@@ -171,31 +179,15 @@ def main():
     import warnings
     warnings.filterwarnings('ignore')
     processor = DataProcessor('../data/ViRes')
-    label_set = LabelSet(['Target', 'Opinion'])
+    label_set = LabelSet(['Target'])
     compose_set = get_acs('../data/ViRes/aspect_category_set.txt', '../data/ViRes/sentiment_set.txt')
 
     from transformers import AutoTokenizer
     tokenizer = AutoTokenizer.from_pretrained('trituenhantaoio/bert-base-vietnamese-uncased')
-    print(tokenizer(processor.train_examples[0].text, processor.train_examples[1].text)[0].ids)
-    print(tokenizer(processor.train_examples[0].text, processor.train_examples[1].text)[0].tokens)
 
-    training_dataset = SupervisedDataset(processor.train_examples, label_set, compose_set, tokenizer, 128)
-    train_dataloader = DataLoader(training_dataset, batch_size=32, num_workers=os.cpu_count())
-    
-    from tqdm.auto import tqdm
-    progress_bar = tqdm(
-        enumerate(train_dataloader),
-        desc='Trainig',
-        total=len(train_dataloader)
-    )
-    import random
-    for _, (_, _, _, batch) in progress_bar:
-        progress_bar.set_postfix(
-            {
-                'something': random.randint(5, 10)
-            }
-        )
-        continue
+    training_dataset = SupervisedDataset(processor.dev_examples, label_set, compose_set, tokenizer, 128)
+    print(training_dataset.class_weights)
+    print(training_dataset.ner_labels)
     # training_dataset = TrainingDataset(processor.dev_examples, label_set, compose_set, tokenizer, 128)
     # # training_dataset = TrainingDataset(processor.test_examples, label_set, compose_set, tokenizer, 128)
     # for example in tqdm(processor.dev_examples):

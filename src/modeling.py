@@ -9,7 +9,7 @@ from transformers import AutoModel
 
 class BertForTABSAJoint_CRF(nn.Module):
 
-	def __init__(self, model_name, config, num_labels, num_ner_labels):
+	def __init__(self, model_name, config, num_labels, num_ner_labels, class_weights):
 		super(BertForTABSAJoint_CRF, self).__init__()
 		self.bert = AutoModel.from_pretrained(model_name)
 		self.dropout = nn.Dropout(config.hidden_dropout_prob)
@@ -17,6 +17,7 @@ class BertForTABSAJoint_CRF(nn.Module):
 		self.ner_hidden2tag = nn.Linear(config.hidden_size, num_ner_labels) # num_ner_labels is the type sum of ner labels: TO or BIO etc
 		self.num_labels = num_labels
 		self.num_ner_labels = num_ner_labels
+		self.class_weights = class_weights
 		# CRF
 		self.CRF_model = CRF(num_ner_labels, batch_first=True)
 
@@ -51,7 +52,7 @@ class BertForTABSAJoint_CRF(nn.Module):
 		
 		# the classifier of category & polarity
 		if not inference:
-			loss_fct = CrossEntropyLoss()
+			loss_fct = CrossEntropyLoss(weight=self.class_weights)
 			loss = loss_fct(logits, acs_labels)
 			ner_loss_list = self.CRF_model(ner_logits, ner_labels, ner_mask.type(torch.ByteTensor).cuda(), reduction='none')
 			ner_loss = torch.mean(-ner_loss_list)

@@ -67,6 +67,8 @@ def align_tokens_and_annotations_bio(tokenized: Encoding, ner_labels, annotation
     for anno in annotations:
         if anno['text'] == 'null':
             continue
+        if anno['label'] == 'Opinion':
+            continue
         annotation_token_idx_set = set()
         for char_idx in range(anno['start'], anno['end']):
             token_idx = tokenized.char_to_token(char_idx)
