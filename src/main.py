@@ -89,7 +89,7 @@ def main():
     torch.cuda.manual_seed(args.seed)
 
     processor = DataProcessor(args.data_dir)
-    label_set = LabelSet(['Target', 'Opinion'])
+    label_set = LabelSet(['Target'])
     compose_set = get_acs(os.path.join(args.data_dir, 'aspect_category_set.txt'), os.path.join(args.data_dir, 'sentiment_set.txt'))
     
 
