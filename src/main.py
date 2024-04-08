@@ -118,7 +118,7 @@ def main():
 
     # -------- Setup Training --------
 
-    model = BertForTABSAJoint_CRF(args.model_name, config, 2, len(label_set.labels_to_id), class_weights=train_dataset.class_weights)
+    model = BertForTABSAJoint_CRF(args.model_name, config, 2, len(label_set.labels_to_id), class_weights=train_dataset.class_weights.to(device))
     if n_gpu > 1:
         model = torch.nn.DataParallel(model)
 
